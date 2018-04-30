@@ -1,0 +1,46 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c62a284557a469a49af3017f189e6d25, type: 3}
+  m_Name: Level
+  m_EditorClassIdentifier: 
+  SheetName: 3D_PF_Player
+  WorksheetName: level
+  dataArray:
+  - no: 1
+    maxhp: 100
+    maxmp: 100
+  - no: 2
+    maxhp: 200
+    maxmp: 200
+  - no: 3
+    maxhp: 300
+    maxmp: 300
+  - no: 4
+    maxhp: 400
+    maxmp: 400
+  - no: 5
+    maxhp: 500
+    maxmp: 500
+  - no: 6
+    maxhp: 600
+    maxmp: 600
+  - no: 7
+    maxhp: 700
+    maxmp: 700
+  - no: 8
+    maxhp: 800
+    maxmp: 800
+  - no: 9
+    maxhp: 900
+    maxmp: 900
+  - no: 10
+    maxhp: 1000
+    maxmp: 1000
