@@ -1,0 +1,40 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2992e1b641eb924ab78db886a9798f5, type: 3}
+  m_Name: Enemy
+  m_EditorClassIdentifier: 
+  SheetName: 3D_PF_DB
+  WorksheetName: enemy
+  dataArray:
+  - no: 1
+    name: green mushroom
+    maxhp: 50
+    maxmp: 0
+    att: 15
+    def: 5
+  - no: 2
+    name: blue mushroom
+    maxhp: 100
+    maxmp: 0
+    att: 20
+    def: 10
+  - no: 3
+    name: red mushroom
+    maxhp: 150
+    maxmp: 0
+    att: 25
+    def: 15
+  - no: 4
+    name: fire monster
+    maxhp: 200
+    maxmp: 0
+    att: 30
+    def: 20

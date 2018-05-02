@@ -18,19 +18,19 @@ public class SceneManager
     }
 
     private E_SCENE_NO prevSceneNo;
-    public int PrevSceneNo
+    public E_SCENE_NO PrevSceneNo
     {
         get
         {
-            return (int)prevSceneNo;
+            return prevSceneNo;
         }
     }
     private E_SCENE_NO currSceneNo;
-    public int CurrSceneNo
+    public E_SCENE_NO CurrSceneNo
     {
         get
         {
-            return (int)currSceneNo;
+            return currSceneNo;
         }
     }
     private E_SCENE_NO nextSceneNo;
@@ -42,9 +42,9 @@ public class SceneManager
         nextSceneNo = E_SCENE_NO.TOWN;
     }
 
-    public void SetNextScene(int eSceneNo)
+    public void SetNextScene(E_SCENE_NO eSceneNo)
     {
-        nextSceneNo = (E_SCENE_NO)eSceneNo;
+        nextSceneNo = eSceneNo;
     }
 
     public void ChangeScene()

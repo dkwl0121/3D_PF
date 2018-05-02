@@ -31,22 +31,22 @@ public class EnemyPool : MonoBehaviour
 
     public void Setup()
     {
-        arrObjEnemy = new GameObject[(int)E_ENEMY_TYPE.MAX];
+        arrObjEnemy = new GameObject[(int)E_CHARACTER_TYPE.MAX];
         for (int i = 0; i < arrObjEnemy.Length; ++i)
         {
-            switch ((E_ENEMY_TYPE)i)
+            switch ((E_CHARACTER_TYPE)i)
             {
-                case E_ENEMY_TYPE.MUSHROOM_01:
+                case E_CHARACTER_TYPE.MUSHROOM_01:
                     {
                         arrObjEnemy[i] = Resources.Load(Util.ResourcePath.MUSHROOM_01) as GameObject;
                     }
                     break;
-                case E_ENEMY_TYPE.MUSHROOM_02:
+                case E_CHARACTER_TYPE.MUSHROOM_02:
                     {
                         arrObjEnemy[i] = Resources.Load(Util.ResourcePath.MUSHROOM_02) as GameObject;
                     }
                     break;
-                case E_ENEMY_TYPE.MUSHROOM_03:
+                case E_CHARACTER_TYPE.MUSHROOM_03:
                     {
                         arrObjEnemy[i] = Resources.Load(Util.ResourcePath.MUSHROOM_03) as GameObject;
                     }
@@ -58,19 +58,19 @@ public class EnemyPool : MonoBehaviour
         //Transform tfParent = new GameObject("EnemyPool").transform;
         for (int i = 0; i < arrObjEnemy.Length; ++i)
         {
-            switch ((E_ENEMY_TYPE)i)
+            switch ((E_CHARACTER_TYPE)i)
             {
-                case E_ENEMY_TYPE.MUSHROOM_01:
+                case E_CHARACTER_TYPE.MUSHROOM_01:
                     {
                         arrTfParent[i] = new GameObject(Util.ResourcePath.MUSHROOM_01).transform;
                     }
                     break;
-                case E_ENEMY_TYPE.MUSHROOM_02:
+                case E_CHARACTER_TYPE.MUSHROOM_02:
                     {
                         arrTfParent[i] = new GameObject(Util.ResourcePath.MUSHROOM_02).transform;
                     }
                     break;
-                case E_ENEMY_TYPE.MUSHROOM_03:
+                case E_CHARACTER_TYPE.MUSHROOM_03:
                     {
                         arrTfParent[i] = new GameObject(Util.ResourcePath.MUSHROOM_03).transform;
                     }
@@ -96,11 +96,11 @@ public class EnemyPool : MonoBehaviour
         }
     }
 
-    public GameObject ActiveEnemy(int eType, Vector3 pos, Quaternion rot)
+    public GameObject ActiveEnemy(E_CHARACTER_TYPE eType, Vector3 pos, Quaternion rot)
     {
-        if (eType <= (int)E_ENEMY_TYPE.INVALID || eType >= (int)E_ENEMY_TYPE.MAX) return null;
+        if (eType <= E_CHARACTER_TYPE.INVALID || eType >= E_CHARACTER_TYPE.MAX) return null;
 
-        int nCurrIndex = GetCurrPoolIndex((E_ENEMY_TYPE)eType);
+        int nCurrIndex = GetCurrPoolIndex(eType);
 
         GameObject objActive = null;
         
@@ -112,7 +112,7 @@ public class EnemyPool : MonoBehaviour
         return objActive;
     }
 
-    private int GetCurrPoolIndex(E_ENEMY_TYPE eType)
+    private int GetCurrPoolIndex(E_CHARACTER_TYPE eType)
     {
         int index = (int)eType;
 
@@ -128,7 +128,7 @@ public class EnemyPool : MonoBehaviour
         return arrEnemyPool[index].Count - 1;
     }
 
-    private void MakeEnemyMore(E_ENEMY_TYPE eType)
+    private void MakeEnemyMore(E_CHARACTER_TYPE eType)
     {
         int index = (int)eType;
 

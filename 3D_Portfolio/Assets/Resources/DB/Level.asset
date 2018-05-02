@@ -8,39 +8,129 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c62a284557a469a49af3017f189e6d25, type: 3}
+  m_Script: {fileID: 11500000, guid: 7fc8e090a171b0145bd29af4eb148e46, type: 3}
   m_Name: Level
   m_EditorClassIdentifier: 
-  SheetName: 3D_PF_Player
+  SheetName: 3D_PF_DB
   WorksheetName: level
   dataArray:
-  - no: 1
+  - level: 1
     maxhp: 100
-    maxmp: 100
-  - no: 2
+    maxmp: 50
+    maxexp: 100
+    att: 35
+    def: 10
+    str: 10
+    dex: 15
+    inte: 20
+    uphp: 10
+    upmp: 5
+    cooltime: 10
+  - level: 2
     maxhp: 200
-    maxmp: 200
-  - no: 3
+    maxmp: 100
+    maxexp: 200
+    att: 40
+    def: 12
+    str: 20
+    dex: 20
+    inte: 40
+    uphp: 20
+    upmp: 10
+    cooltime: 15
+  - level: 3
     maxhp: 300
-    maxmp: 300
-  - no: 4
+    maxmp: 150
+    maxexp: 300
+    att: 50
+    def: 16
+    str: 30
+    dex: 25
+    inte: 60
+    uphp: 30
+    upmp: 15
+    cooltime: 20
+  - level: 4
     maxhp: 400
-    maxmp: 400
-  - no: 5
+    maxmp: 200
+    maxexp: 400
+    att: 70
+    def: 24
+    str: 40
+    dex: 30
+    inte: 80
+    uphp: 40
+    upmp: 20
+    cooltime: 25
+  - level: 5
     maxhp: 500
-    maxmp: 500
-  - no: 6
+    maxmp: 250
+    maxexp: 500
+    att: 100
+    def: 40
+    str: 50
+    dex: 35
+    inte: 100
+    uphp: 50
+    upmp: 25
+    cooltime: 30
+  - level: 6
     maxhp: 600
-    maxmp: 600
-  - no: 7
+    maxmp: 300
+    maxexp: 600
+    att: 140
+    def: 52
+    str: 60
+    dex: 40
+    inte: 120
+    uphp: 60
+    upmp: 30
+    cooltime: 35
+  - level: 7
     maxhp: 700
-    maxmp: 700
-  - no: 8
+    maxmp: 350
+    maxexp: 700
+    att: 190
+    def: 86
+    str: 70
+    dex: 45
+    inte: 140
+    uphp: 70
+    upmp: 35
+    cooltime: 40
+  - level: 8
     maxhp: 800
-    maxmp: 800
-  - no: 9
+    maxmp: 400
+    maxexp: 800
+    att: 250
+    def: 105
+    str: 80
+    dex: 50
+    inte: 160
+    uphp: 80
+    upmp: 40
+    cooltime: 45
+  - level: 9
     maxhp: 900
-    maxmp: 900
-  - no: 10
+    maxmp: 450
+    maxexp: 900
+    att: 310
+    def: 127
+    str: 90
+    dex: 55
+    inte: 180
+    uphp: 90
+    upmp: 45
+    cooltime: 50
+  - level: 10
     maxhp: 1000
-    maxmp: 1000
+    maxmp: 500
+    maxexp: 1000
+    att: 380
+    def: 159
+    str: 100
+    dex: 60
+    inte: 200
+    uphp: 100
+    upmp: 50
+    cooltime: 55

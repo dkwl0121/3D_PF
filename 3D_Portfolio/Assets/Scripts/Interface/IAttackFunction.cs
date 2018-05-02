@@ -7,12 +7,19 @@ public class IAttackFunction : MonoBehaviour
     [HideInInspector] public Animator anim;
     public AnimatorStateInfo animState;
 
+    [HideInInspector] public IChracterControl CharacterCtrl;
+
     [HideInInspector] public bool isAttack = false;
 
     protected string[] arrAnimParam;
+
+    public E_LAYER_TYPE eEnemyLayer;
+
+    protected bool isAttDelay;
     
     protected void Awake()
     {
+        isAttDelay = false;
     }
     
     public void ResetAttack()
@@ -29,38 +36,56 @@ public class IAttackFunction : MonoBehaviour
     
     protected void StartAttack(int index)
     {
+        isAttDelay = true;
+
+        isAttack = true;
         ResetAttack();
         anim.SetBool(arrAnimParam[index], true);
-        isAttack = true;
+        
+        StartCoroutine(DelayAtt());
     }
 
-    protected void StartEffect()
+    protected void StartEffect(int index)
     {
-        // 이펙트 콜리더로 어텍할지 박스콜리더로 할지 
+        
     }
 
-    public void AttackColOn(int index)
+    protected void StartDamage(int index)
     {
-        //float size = ((float)index * 0.5f) + 1;
 
-        //Vector3 Pos = this.transform.position + (this.transform.up * size) + (this.transform.forward * size);
-
-        //List<GameObject> listTarget = new List<GameObject>();
-
-        //Collider[] cols = Physics.OverlapSphere(Pos, size);
-        //for (int i = 0; i < cols.Length; ++i)
-        //{
-        //    if (cols[i].gameObject.CompareTag(Util.Tag.ENEMY))
-        //    {
-        //        listTarget.Add(cols[i].gameObject);
-        //    }
-        //}
     }
+
+    //public void AttackColOn(int index)
+    //{
+    //    //float size = ((float)index * 0.5f) + 1;
+
+    //    //Vector3 Pos = this.transform.position + (this.transform.up * size) + (this.transform.forward * size);
+
+    //    //List<GameObject> listTarget = new List<GameObject>();
+
+    //    //Collider[] cols = Physics.OverlapSphere(Pos, size);
+    //    //for (int i = 0; i < cols.Length; ++i)
+    //    //{
+    //    //    if (cols[i].gameObject.CompareTag(Util.Tag.ENEMY))
+    //    //    {
+    //    //        listTarget.Add(cols[i].gameObject);
+    //    //    }
+    //    //}
+    //}
 
     public void AutoAttack()
     {
-        if (isAttack) return;
+        // 어텍 중이거나 어텍 딜레이 중이면
+        if (isAttack || isAttDelay) return;
 
-        StartAttack(Random.Range(0, arrAnimParam.Length));
+        if (!CharacterCtrl.isDead)
+            StartAttack(Random.Range(0, arrAnimParam.Length));
+    }
+
+    private IEnumerator DelayAtt()
+    {
+        yield return new WaitForSeconds(3.0f);
+
+        isAttDelay = false;
     }
 }

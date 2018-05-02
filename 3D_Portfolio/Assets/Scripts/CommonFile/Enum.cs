@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-enum E_SCENE_NO
+public enum E_SCENE_NO
 {
     INVALID = (-1),
     TITLE,
@@ -13,18 +13,17 @@ enum E_SCENE_NO
     MAX
 }
 
-enum E_CHARACTER_TYPE
+public enum E_CHARACTER_TYPE
 {
+    PLAYER = -2,
     INVALID = (-1),
-    PLAYER,
-    ENEMY_01,
-    ENEMY_02,
-    BOSS,
-    NPC,
+    MUSHROOM_01,
+    MUSHROOM_02,
+    MUSHROOM_03,
     MAX
 }
 
-enum E_CHARACTER_STAT
+public enum E_CHARACTER_STAT
 {
     INVALID = (-1),
     IDLE,
@@ -36,7 +35,7 @@ enum E_CHARACTER_STAT
     MAX
 }
 
-enum E_PLAYER_ATTACK_NO
+public enum E_PLAYER_ATTACK_NO
 {
     INVALID = (-1),
     DEFAULT,
@@ -46,11 +45,15 @@ enum E_PLAYER_ATTACK_NO
     MAX
 }
 
-enum E_ENEMY_TYPE
+//public enum E_ENEMY_TYPE
+//{
+//    INVALID = (-1),
+
+//    MAX
+//}
+
+public enum E_LAYER_TYPE
 {
-    INVALID = (-1),
-    MUSHROOM_01,
-    MUSHROOM_02,
-    MUSHROOM_03,
-    MAX
+    PLAYER = 8,
+    ENEMY
 }

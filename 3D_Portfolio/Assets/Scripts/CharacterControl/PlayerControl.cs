@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerControl : IChracter
+public class PlayerControl : IChracterControl
 {
     public GameObject objWeaponParent;
     public JoyStickControl joystick;
@@ -12,7 +12,7 @@ public class PlayerControl : IChracter
     
     private new void Awake()
     {
-        base.Awake();   // 부모의 Awake() 호출
+        base.Awake();   // 부모의 Start() 호출
         
         GameObject weapon = Resources.Load("Weapon/Staff_01") as GameObject;
         Instantiate(weapon, objWeaponParent.transform);
@@ -24,12 +24,17 @@ public class PlayerControl : IChracter
         fMoveSpeed = 4.0f;
         navMesh.speed = fMoveSpeed;
 
-        strEnemyName = Util.Tag.ENEMY;
-
-        LoadData();
+        eCharType = E_CHARACTER_TYPE.PLAYER;
+        eEnemyLayer = E_LAYER_TYPE.ENEMY;
+        attackFunc.eEnemyLayer = eEnemyLayer;
         
         //====================================================================================
-        vDestPos = GameObject.Find("Dest").transform.position;
+        //vDestPos = GameObject.Find("Dest").transform.position;
+    }
+
+    private void Start()
+    {
+        LoadData();
     }
 
     private void OnDestroy()
@@ -39,6 +44,8 @@ public class PlayerControl : IChracter
 
     private void Update()
     {
+        if (isDead) return;
+
         if (attackFunc.isAttack)
         {
             fCurrMoveSpeed = 0.0f;
@@ -135,13 +142,13 @@ public class PlayerControl : IChracter
         // 이동
         if (fCurrMoveSpeed < fMoveSpeed)
         {
-            fCurrMoveSpeed += Time.deltaTime * 2.0f;
+            fCurrMoveSpeed += Time.deltaTime * fMoveSpeed;
             Mathf.Clamp(fCurrMoveSpeed, 0.0f, fMoveSpeed);
         }
 
         transform.Translate(Vector3.forward * fDistance * fCurrMoveSpeed * Time.deltaTime);
     }
-
+    
     private void AutoOn()
     {
         isAuto = true;
@@ -166,41 +173,35 @@ public class PlayerControl : IChracter
 
     private void LoadData()
     {
-        if (PlayerPrefs.HasKey("nLevel"))
-        {
-            nLevel = PlayerPrefs.GetInt("nLevel");
-            fCurrHP = PlayerPrefs.GetInt("fCurrHP");
-            fCurrMP = PlayerPrefs.GetInt("fCurrMP");
-            fCurrExp = PlayerPrefs.GetInt("fCurrExp");
-        }
-        else
-        {
-            nLevel = 1;
-            fCurrHP = fMaxHP;
-            fCurrMP = fMaxMP;
-        }
+        //if (PlayerPrefs.HasKey("nLevel"))
+        //{
+        //    Stat.nLevel = PlayerPrefs.GetInt("nLevel");
+        //    Stat.fCurrHP = PlayerPrefs.GetInt("fCurrHP");
+        //    Stat.fCurrMP = PlayerPrefs.GetInt("fCurrMP");
+        //    Stat.fCurrExp = PlayerPrefs.GetInt("fCurrExp");
 
-        // 레벨에 따른 스탯 설정
-        fMaxHP = LevelManager.Instace.GetHpByLevel(nLevel);
-        fMaxMP = LevelManager.Instace.GetMpByLevel(nLevel);
-        fMaxExp = LevelManager.Instace.GetExpByLevel(nLevel);
-        fAtt = LevelManager.Instace.GetAttByLevel(nLevel);
-        fDef = LevelManager.Instace.GetDefByLevel(nLevel);
-        fStr = LevelManager.Instace.GetStrByLevel(nLevel);
-        fDex = LevelManager.Instace.GetDexByLevel(nLevel);
-        fInt = LevelManager.Instace.GetIntByLevel(nLevel);
-        fUpHp = LevelManager.Instace.GetUpHpByLevel(nLevel);
-        fUpMp = LevelManager.Instace.GetUpMpByLevel(nLevel);
-        fCoolTime = LevelManager.Instace.GetCoolTimeByLevel(nLevel);
+        //    // 레벨에 따른 스탯 설정
+        //    LevelDBManager.Instace.SetStat(Stat, Stat.nLevel);
+        //}
+        //else
+        //{
+            Stat.nLevel = 1;
+
+            // 레벨에 따른 스탯 설정
+            LevelDBManager.Instace.SetStat(Stat, Stat.nLevel);
+
+            Stat.fCurrHP = Stat.fMaxHP;
+            Stat.fCurrMP = Stat.fMaxMP;
+        //}
     }
 
     private void SaveData()
     {
         PlayerPrefs.DeleteAll();
-        PlayerPrefs.SetInt("nLevel", nLevel);
-        PlayerPrefs.SetInt("fCurrHP", (int)fCurrHP);
-        PlayerPrefs.SetInt("fCurrMP", (int)fCurrMP);
-        PlayerPrefs.SetInt("fCurrExp", (int)fCurrExp);
+        PlayerPrefs.SetInt("nLevel", Stat.nLevel);
+        PlayerPrefs.SetInt("fCurrHP", (int)Stat.fCurrHP);
+        PlayerPrefs.SetInt("fCurrMP", (int)Stat.fCurrMP);
+        PlayerPrefs.SetInt("fCurrExp", (int)Stat.fCurrExp);
         
         PlayerPrefs.Save();
     }
