@@ -32,4 +32,8 @@ public class enemyData
   float def;
   public float Def { get {return def; } set { def = value;} }
   
+  [SerializeField]
+  float exp;
+  public float Exp { get {return exp; } set { exp = value;} }
+  
 }

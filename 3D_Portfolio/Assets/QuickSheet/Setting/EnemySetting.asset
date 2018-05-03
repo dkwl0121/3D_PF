@@ -41,4 +41,8 @@ MonoBehaviour:
     name: Def
     isEnable: 0
     isArray: 0
+  - type: 5
+    name: Exp
+    isEnable: 0
+    isArray: 0
   AccessCode: 

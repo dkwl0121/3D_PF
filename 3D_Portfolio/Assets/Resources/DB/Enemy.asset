@@ -20,21 +20,25 @@ MonoBehaviour:
     maxmp: 0
     att: 15
     def: 5
+    exp: 20
   - no: 2
     name: blue mushroom
     maxhp: 100
     maxmp: 0
     att: 20
     def: 10
+    exp: 30
   - no: 3
     name: red mushroom
     maxhp: 150
     maxmp: 0
     att: 25
     def: 15
+    exp: 40
   - no: 4
     name: fire monster
     maxhp: 200
     maxmp: 0
     att: 30
     def: 20
+    exp: 50

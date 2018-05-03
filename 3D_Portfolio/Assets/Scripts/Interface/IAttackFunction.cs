@@ -27,7 +27,7 @@ public class IAttackFunction : MonoBehaviour
         if (arrAnimParam == null) return;
 
         isAttack = false;
-
+        
         for (int i = 0; i < arrAnimParam.Length; ++i)
         {
             anim.SetBool(arrAnimParam[i], false);
@@ -36,10 +36,8 @@ public class IAttackFunction : MonoBehaviour
     
     protected void StartAttack(int index)
     {
-        isAttDelay = true;
-
-        isAttack = true;
         ResetAttack();
+        isAttack = true;
         anim.SetBool(arrAnimParam[index], true);
         
         StartCoroutine(DelayAtt());
@@ -55,35 +53,18 @@ public class IAttackFunction : MonoBehaviour
 
     }
 
-    //public void AttackColOn(int index)
-    //{
-    //    //float size = ((float)index * 0.5f) + 1;
-
-    //    //Vector3 Pos = this.transform.position + (this.transform.up * size) + (this.transform.forward * size);
-
-    //    //List<GameObject> listTarget = new List<GameObject>();
-
-    //    //Collider[] cols = Physics.OverlapSphere(Pos, size);
-    //    //for (int i = 0; i < cols.Length; ++i)
-    //    //{
-    //    //    if (cols[i].gameObject.CompareTag(Util.Tag.ENEMY))
-    //    //    {
-    //    //        listTarget.Add(cols[i].gameObject);
-    //    //    }
-    //    //}
-    //}
-
     public void AutoAttack()
     {
-        // 어텍 중이거나 어텍 딜레이 중이면
-        if (isAttack || isAttDelay) return;
+        // 어텍 중이거나 어텍 딜레이 중이거나 죽었으면
+        if (isAttack || isAttDelay || CharacterCtrl.Stat.isDead) return;
 
-        if (!CharacterCtrl.isDead)
-            StartAttack(Random.Range(0, arrAnimParam.Length));
+        StartAttack(Random.Range(0, arrAnimParam.Length));
     }
 
     private IEnumerator DelayAtt()
     {
+        isAttDelay = true;
+
         yield return new WaitForSeconds(3.0f);
 
         isAttDelay = false;

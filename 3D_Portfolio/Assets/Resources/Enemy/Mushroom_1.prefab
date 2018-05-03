@@ -35,11 +35,12 @@ GameObject:
   m_Component:
   - component: {fileID: 4071372686507812}
   - component: {fileID: 95596200423394650}
+  - component: {fileID: 114124244063886474}
+  - component: {fileID: 114895683774135164}
+  - component: {fileID: 114373880397800314}
   - component: {fileID: 54507794651523836}
   - component: {fileID: 136288739435225652}
   - component: {fileID: 195700818876416688}
-  - component: {fileID: 114124244063886474}
-  - component: {fileID: 114895683774135164}
   m_Layer: 9
   m_Name: Mushroom_1
   m_TagString: Mushroom
@@ -235,6 +236,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   eCharType: 0
+  isDead: 0
+--- !u!114 &114373880397800314
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1686712949628014}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ccc57d9af114e6418ee91f83f793625, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Target: {fileID: 0}
+  fMoveY: 5
+  maxHP: 0
+  currHP: 0
 --- !u!114 &114895683774135164
 MonoBehaviour:
   m_ObjectHideFlags: 1

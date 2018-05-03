@@ -31,5 +31,6 @@ public class EnemyDBManager
         stat.fMaxMP = enemyDB.dataArray[(int)eType].Maxmp;
         stat.fAtt = enemyDB.dataArray[(int)eType].Att;
         stat.fDef = enemyDB.dataArray[(int)eType].Def;
+        stat.fMaxExp = enemyDB.dataArray[(int)eType].Exp;
     }
 }

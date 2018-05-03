@@ -45,15 +45,15 @@ public enum E_PLAYER_ATTACK_NO
     MAX
 }
 
-//public enum E_ENEMY_TYPE
-//{
-//    INVALID = (-1),
-
-//    MAX
-//}
-
 public enum E_LAYER_TYPE
 {
     PLAYER = 8,
     ENEMY
+}
+
+public enum E_CAMERA_CTRL_TYPE
+{
+    DEFAULT,
+    STRAIGHT,
+    SHAKE
 }

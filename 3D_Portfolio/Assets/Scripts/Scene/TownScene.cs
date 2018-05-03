@@ -16,6 +16,7 @@ public class TownScene : MonoBehaviour
         LevelDBManager.Instace.Setup();
         EnemyDBManager.Instace.Setup();
         FrameManager.Instace.Setup();
+        PlayerManager.Instace.Setup();
         EnemyPool.Instace.Setup();
 
         objPlayer = GameObject.FindGameObjectWithTag(Util.Tag.PLAYER);

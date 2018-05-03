@@ -19,4 +19,16 @@ public class CommonFunction
                 ctrl.GetDamage(fDamge);
         }
     }
+
+    //// 코사인함수를 활용한 보간
+    //public static float GetCosInterpolate(float fLenght, float fT)
+    //{
+    //    return fLenght * (Mathf.Sin(fT * Mathf.PI) + 1.0f) * 0.5f;    //cos()값이  -1 ~ 1 사이의 숫자가 나옴 0 ~ 1 사이값으로 변경 후 계산!
+    //}
+
+    //// 보간
+    //public static float GetInterpolate(float fLenght, float fT)
+    //{
+    //    return fLenght * fT;
+    //}
 }

@@ -20,6 +20,7 @@ public class CharacterStat
     public float fUpHp = 0;
     public float fUpMp = 0;
     public float fCoolTime = 0;
+    public bool isDead = false;
 }
 
 [RequireComponent(typeof(NavMeshAgent))]
@@ -28,7 +29,7 @@ public class IChracterControl : MonoBehaviour
     public E_CHARACTER_TYPE eCharType;
     //private E_CHARACTER_STAT eCharStat;
 
-    protected CharacterStat Stat;
+    public CharacterStat Stat;
 
     protected NavMeshAgent navMesh = null;
     
@@ -36,10 +37,7 @@ public class IChracterControl : MonoBehaviour
     protected AnimatorStateInfo animState;              // 애니메이터 스텟
 
     protected IAttackFunction attackFunc = null;        // 공격 함수 클래스
-
-    protected CapsuleCollider BodyCol = null;           // 몸 콜리더
-    protected SphereCollider AttackCol = null;          // 공격 콜리더
-
+    
     protected Vector3 vDestPos;
     protected GameObject objTarget = null;              // 타겟
 
@@ -48,7 +46,6 @@ public class IChracterControl : MonoBehaviour
 
     protected E_LAYER_TYPE eEnemyLayer;
     
-    public bool isDead;
     protected float fCurrMoveSpeed = 0.0f;
     protected float fMoveSpeed = 0;
 
@@ -66,16 +63,11 @@ public class IChracterControl : MonoBehaviour
         attackFunc.anim = anim;
         attackFunc.animState = animState;
         attackFunc.CharacterCtrl = this;
-        
-        isDead = false;
-
-        BodyCol = this.GetComponent<CapsuleCollider>();
-        AttackCol = this.GetComponentInChildren<SphereCollider>();
     }
 
     protected void OnEnable()
     {
-        isDead = false;
+        Stat.isDead = false;
         anim.enabled = true;
         Stat.fCurrHP = Stat.fMaxHP;
         Stat.fCurrMP = Stat.fMaxMP;
@@ -93,7 +85,7 @@ public class IChracterControl : MonoBehaviour
         {
             if (cols[i].gameObject.layer == (int)eEnemyLayer
                 && cols[i].gameObject.activeSelf
-                && !cols[i].gameObject.GetComponent<IChracterControl>().isDead)
+                && !cols[i].gameObject.GetComponent<IChracterControl>().Stat.isDead)
             {
                 listTarget.Add(cols[i].gameObject);
             }
@@ -116,16 +108,21 @@ public class IChracterControl : MonoBehaviour
 
     public float GetAttackValue()
     {
-        float fAttValue = 0;
-
-        fAttValue = Stat.fAtt + (Stat.fInt * 0.5f);
+        float fAttValue = Stat.fAtt + (Stat.fInt * 0.5f);
 
         return fAttValue;
+    }
+
+    public float GetManaValue()
+    {
+        float fManaValue = 5 * Stat.nLevel;
+
+        return fManaValue;
     }
     
     public void GetDamage(float fDamge)
     {
-        if (isDead) return;
+        if (Stat.isDead) return;
 
         // 민첩에 의해 회피율이 올라감.
         if (Random.Range(0, 100) == Stat.fDex - 1) return;
@@ -138,20 +135,24 @@ public class IChracterControl : MonoBehaviour
         {
             Stat.fCurrHP -= fDamge;
             Mathf.Clamp(Stat.fCurrHP, 0, Stat.fMaxHP);
+            
             if (!attackFunc.isAttack)
                 anim.SetTrigger(Util.AnimParam.DAMAGE);
 
             if (Stat.fCurrHP <= 0)
+            {
+                if (eCharType != E_CHARACTER_TYPE.PLAYER)
+                    PlayerManager.Instace.AddExp(Stat.fMaxExp);
                 StartDie();
+            }
         }
-        
-        //===========================
-        // 깍이는 체력 보여주기
+
+        // 깍이는 값 보여주기
     }
 
     private void StartDie()
     {
-        isDead = true;
+        Stat.isDead = true;
         attackFunc.ResetAttack();
         anim.SetTrigger(Util.AnimParam.DEATH);
     }

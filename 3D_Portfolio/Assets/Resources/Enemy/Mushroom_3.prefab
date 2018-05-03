@@ -35,11 +35,12 @@ GameObject:
   m_Component:
   - component: {fileID: 4698280800620138}
   - component: {fileID: 95210518012366380}
+  - component: {fileID: 114837357926222076}
+  - component: {fileID: 114263478392092198}
+  - component: {fileID: 114091451440325580}
   - component: {fileID: 54304979943172180}
   - component: {fileID: 136154340521006930}
   - component: {fileID: 195347507166277962}
-  - component: {fileID: 114837357926222076}
-  - component: {fileID: 114263478392092198}
   m_Layer: 9
   m_Name: Mushroom_3
   m_TagString: Mushroom
@@ -223,6 +224,21 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &114091451440325580
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1507574332570698}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ccc57d9af114e6418ee91f83f793625, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Target: {fileID: 0}
+  fMoveY: 5
+  maxHP: 0
+  currHP: 0
 --- !u!114 &114263478392092198
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -250,6 +266,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   eCharType: 2
+  isDead: 0
 --- !u!136 &136154340521006930
 CapsuleCollider:
   m_ObjectHideFlags: 1

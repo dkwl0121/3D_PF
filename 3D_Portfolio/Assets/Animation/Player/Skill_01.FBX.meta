@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: ecf1c9844e13bbe48a8729667efdc143
+guid: d49af005f8f03dd40944d120d5009866
 ModelImporter:
   serializedVersion: 22
   fileIDToRecycleName:
@@ -67,9 +67,11 @@ ModelImporter:
     100122: Mesh_Knight
     100124: Shield
     100126: Sword
-    100128: Mesh-Mage
-    100130: Mesh-Staff
-    100132: Exporter
+    100128: Mesh-Swordsman
+    100130: SwordL
+    100132: SwordR
+    100134: Spear
+    100136: Exporter
     400000: B_Head
     400002: B_L_Calf
     400004: B_L_Clavicle
@@ -134,9 +136,17 @@ ModelImporter:
     400122: Mesh_Knight
     400124: Shield
     400126: Sword
-    400128: Mesh-Mage
-    400130: Mesh-Staff
-    400132: Exporter
+    400128: Mesh-Swordsman
+    400130: SwordL
+    400132: SwordR
+    400134: Spear
+    400136: Exporter
+    2300000: SwordL
+    2300002: SwordR
+    2300004: Spear
+    3300000: SwordL
+    3300002: SwordR
+    3300004: Spear
     4300000: Mesh_Berserker
     4300002: Mesh_Karate
     4300004: Mesh_Ninja
@@ -144,8 +154,10 @@ ModelImporter:
     4300008: Mesh_Knight
     4300010: Shield
     4300012: Sword
-    4300014: Mesh-Mage
-    4300016: Mesh-Staff
+    4300014: Mesh-Swordsman
+    4300016: SwordR
+    4300018: SwordL
+    4300020: Spear
     7400000: Attack1
     7400002: Skill_01
     9500000: //RootNode
@@ -156,8 +168,7 @@ ModelImporter:
     13700008: Mesh_Knight
     13700010: Shield
     13700012: Sword
-    13700014: Mesh-Mage
-    13700016: Mesh-Staff
+    13700014: Mesh-Swordsman
   externalObjects: {}
   materials:
     importMaterials: 0
@@ -192,7 +203,7 @@ ModelImporter:
       name: Attack1
       takeName: Take 001
       firstFrame: 0
-      lastFrame: 40
+      lastFrame: 35
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -212,7 +223,7 @@ ModelImporter:
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
       events:
-      - time: 0.3983573
+      - time: 0.41683778
         functionName: Hit
         data: 
         objectReferenceParameter: {instanceID: 0}
@@ -223,7 +234,7 @@ ModelImporter:
       - path: 
         weight: 1
       - path: Exporter
-        weight: 1
+        weight: 0
       - path: Motion
         weight: 1
       - path: Motion/B_Pelvis
@@ -335,7 +346,7 @@ ModelImporter:
       name: Skill_01
       takeName: Take 001
       firstFrame: 0
-      lastFrame: 40
+      lastFrame: 34
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -355,32 +366,32 @@ ModelImporter:
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
       events:
-      - time: 0.99762475
-        functionName: ResetAttack
-        data: 
-        objectReferenceParameter: {instanceID: 0}
-        floatParameter: 0
-        intParameter: 0
-        messageOptions: 0
-      - time: 0.32541567
+      - time: 0.42117116
         functionName: StartEffect
         data: 
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
         intParameter: 1
         messageOptions: 0
-      - time: 0.5518018
+      - time: 0.6328829
         functionName: StartDamage
         data: 
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
         intParameter: 1
         messageOptions: 0
+      - time: 0.9864865
+        functionName: ResetAttack
+        data: 
+        objectReferenceParameter: {instanceID: 0}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
       transformMask:
       - path: 
         weight: 1
       - path: Exporter
-        weight: 1
+        weight: 0
       - path: Motion
         weight: 1
       - path: Motion/B_Pelvis
@@ -1224,7 +1235,7 @@ ModelImporter:
     hasTranslationDoF: 0
     hasExtraRoot: 0
     skeletonHasParents: 0
-  lastHumanDescriptionAvatarSource: {fileID: 9000000, guid: 7c72ed3f90575084c9f3b5b585887182,
+  lastHumanDescriptionAvatarSource: {fileID: 9000000, guid: ec9ce9573683d684aa75013daec3884d,
     type: 3}
   animationType: 3
   humanoidOversampling: 1
