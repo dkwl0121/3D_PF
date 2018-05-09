@@ -22,7 +22,7 @@ public class EnemyDBManager
 
     public void Setup()
     {
-        enemyDB = Resources.Load<enemy>("DB/enemy");
+        enemyDB = Resources.Load<enemy>(Util.ResourcePath.DB_ENEMY);
     }
 
     public void SetStat(CharacterStat stat, E_CHARACTER_TYPE eType)
@@ -32,5 +32,6 @@ public class EnemyDBManager
         stat.fAtt = enemyDB.dataArray[(int)eType].Att;
         stat.fDef = enemyDB.dataArray[(int)eType].Def;
         stat.fMaxExp = enemyDB.dataArray[(int)eType].Exp;
+        stat.nMoney = enemyDB.dataArray[(int)eType].Coin;
     }
 }

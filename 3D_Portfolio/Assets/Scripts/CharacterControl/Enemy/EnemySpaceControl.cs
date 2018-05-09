@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class EnemySpaceControl : MonoBehaviour
 {
-    public int nEnemyNo;
+    [HideInInspector] public E_CHARACTER_TYPE eEnemyNo;
     public int nMaxCount;
     public int nRecreateSeconds;
     public bool isRecreate;
@@ -14,16 +14,18 @@ public class EnemySpaceControl : MonoBehaviour
 
     private void Start()
     {
+        if (eEnemyNo == E_CHARACTER_TYPE.INVALID) Destroy(this.gameObject);
+
         lstEnemy = new List<GameObject>();
 
         for (int i = 0; i < nMaxCount; ++i)
         {
             if (isFixedRot)
                 lstEnemy.Add(EnemyPool.Instace.ActiveEnemy(
-                    (E_CHARACTER_TYPE)nEnemyNo, this.transform.position, this.transform.rotation));
+                    eEnemyNo, this.transform.position, this.transform.rotation));
             else
                 lstEnemy.Add(EnemyPool.Instace.ActiveEnemy(
-                    (E_CHARACTER_TYPE)nEnemyNo, this.transform.position, Quaternion.Euler(Random.Range(0, 360), 0, Random.Range(0, 360))));
+                    eEnemyNo, this.transform.position, Quaternion.Euler(Random.Range(0, 360), 0, Random.Range(0, 360))));
         }
     }
 
@@ -47,6 +49,6 @@ public class EnemySpaceControl : MonoBehaviour
         yield return new WaitForSeconds(nRecreateSeconds);
 
         lstEnemy.Add(EnemyPool.Instace.ActiveEnemy(
-            (E_CHARACTER_TYPE)nEnemyNo, this.transform.position, Quaternion.Euler(Random.Range(0, 360), 0, Random.Range(0, 360))));
+            eEnemyNo, this.transform.position, Quaternion.Euler(Random.Range(0, 360), 0, Random.Range(0, 360))));
     }
 }

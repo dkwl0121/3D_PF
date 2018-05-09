@@ -9,6 +9,8 @@ public class MushroomAttackFunction : IAttackFunction
     {
         base.Awake();
 
+        fDelayAtt = 3.0f;
+
         arrAnimParam = new string[(int)E_PLAYER_ATTACK_NO.DEFAULT + 1];
         arrAnimParam[(int)E_PLAYER_ATTACK_NO.DEFAULT] = Util.AnimParam.DEFAULT_ATTACK;
     }

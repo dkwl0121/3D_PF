@@ -47,7 +47,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1523806303720324
 GameObject:
   m_ObjectHideFlags: 1
@@ -158,7 +158,7 @@ Transform:
   m_GameObject: {fileID: 1507574332570698}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.2, y: 0.2, z: 0.2}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children:
   - {fileID: 4717225112702864}
   - {fileID: 4122595061173402}
@@ -237,8 +237,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Target: {fileID: 0}
   fMoveY: 5
-  maxHP: 0
-  currHP: 0
+  fScale: 0
 --- !u!114 &114263478392092198
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -266,7 +265,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   eCharType: 2
-  isDead: 0
 --- !u!136 &136154340521006930
 CapsuleCollider:
   m_ObjectHideFlags: 1

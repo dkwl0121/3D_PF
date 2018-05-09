@@ -23,9 +23,10 @@ MonoBehaviour:
     str: 10
     dex: 15
     inte: 20
-    uphp: 10
-    upmp: 5
+    uphp: 5
+    upmp: 2
     cooltime: 10
+    leveluptip: Level Up!!
   - level: 2
     maxhp: 200
     maxmp: 100
@@ -35,9 +36,12 @@ MonoBehaviour:
     str: 20
     dex: 20
     inte: 40
-    uphp: 20
-    upmp: 10
+    uphp: 10
+    upmp: 4
     cooltime: 15
+    leveluptip: 'Level Up!!
+
+      First skill button was Opened!!'
   - level: 3
     maxhp: 300
     maxmp: 150
@@ -47,9 +51,10 @@ MonoBehaviour:
     str: 30
     dex: 25
     inte: 60
-    uphp: 30
-    upmp: 15
+    uphp: 15
+    upmp: 6
     cooltime: 20
+    leveluptip: Level Up!!
   - level: 4
     maxhp: 400
     maxmp: 200
@@ -59,9 +64,10 @@ MonoBehaviour:
     str: 40
     dex: 30
     inte: 80
-    uphp: 40
-    upmp: 20
+    uphp: 20
+    upmp: 8
     cooltime: 25
+    leveluptip: Level Up!! \n Second skill button was Opened!!
   - level: 5
     maxhp: 500
     maxmp: 250
@@ -71,9 +77,10 @@ MonoBehaviour:
     str: 50
     dex: 35
     inte: 100
-    uphp: 50
-    upmp: 25
+    uphp: 25
+    upmp: 10
     cooltime: 30
+    leveluptip: Level Up!!
   - level: 6
     maxhp: 600
     maxmp: 300
@@ -83,9 +90,10 @@ MonoBehaviour:
     str: 60
     dex: 40
     inte: 120
-    uphp: 60
-    upmp: 30
+    uphp: 30
+    upmp: 12
     cooltime: 35
+    leveluptip: Level Up!! \n Third skill button was Opened!!
   - level: 7
     maxhp: 700
     maxmp: 350
@@ -95,9 +103,10 @@ MonoBehaviour:
     str: 70
     dex: 45
     inte: 140
-    uphp: 70
-    upmp: 35
+    uphp: 35
+    upmp: 14
     cooltime: 40
+    leveluptip: Level Up!!
   - level: 8
     maxhp: 800
     maxmp: 400
@@ -107,9 +116,10 @@ MonoBehaviour:
     str: 80
     dex: 50
     inte: 160
-    uphp: 80
-    upmp: 40
+    uphp: 40
+    upmp: 16
     cooltime: 45
+    leveluptip: Level Up!!
   - level: 9
     maxhp: 900
     maxmp: 450
@@ -119,9 +129,10 @@ MonoBehaviour:
     str: 90
     dex: 55
     inte: 180
-    uphp: 90
-    upmp: 45
+    uphp: 45
+    upmp: 18
     cooltime: 50
+    leveluptip: Level Up!!
   - level: 10
     maxhp: 1000
     maxmp: 500
@@ -131,6 +142,7 @@ MonoBehaviour:
     str: 100
     dex: 60
     inte: 200
-    uphp: 100
-    upmp: 50
+    uphp: 50
+    upmp: 20
     cooltime: 55
+    leveluptip: Level Up!!

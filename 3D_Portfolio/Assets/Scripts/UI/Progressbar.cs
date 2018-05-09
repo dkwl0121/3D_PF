@@ -8,16 +8,14 @@ public class Progressbar : MonoBehaviour
     [HideInInspector] public GameObject Target;
     [HideInInspector] public float fMoveY;
     [HideInInspector] public float fScale;
-
-    //private Camera CanvasCamera;
+    
     RectTransform CanvasRect;
     private GameObject objProgressbar;
     private Image imgBar;
     
     private void Awake()
     {
-        GameObject objCanvas = Instantiate(Resources.Load("UI/Canvas Progressbar") as GameObject, Target.transform);
-        //CanvasCamera = objCanvas.GetComponent<Canvas>().worldCamera;
+        GameObject objCanvas = Instantiate(Resources.Load(Util.ResourcePath.UI_PROGRESSBAR) as GameObject, Target.transform);
         CanvasRect = objCanvas.GetComponent<RectTransform>();
         objProgressbar = objCanvas.transform.Find("HP").gameObject;
         imgBar = objProgressbar.transform.FindChildByRecursive("Gauge").gameObject.GetComponent<Image>();
@@ -32,20 +30,20 @@ public class Progressbar : MonoBehaviour
     {
         if (Target == null) return;
 
+        // == 스크린 좌표로 변경 ==
         Vector3 Pos = Target.transform.position;
         Pos.y += fMoveY;
-
-        // == 스크린 좌표로 변경 ==
-        Vector3 screenPos = Camera.main.WorldToViewportPoint(Pos);
-        screenPos.x *= CanvasRect.rect.width;
-        screenPos.y *= CanvasRect.rect.height;
-        objProgressbar.transform.position = screenPos;
-        objProgressbar.transform.localScale = new Vector3(fScale, fScale, fScale);
-
-        //Vector3 uiPos = Camera.main.WorldToScreenPoint(Pos);
-        //float fScale = Mathf.InverseLerp(0, 1.0f, 1.0f - screenPos.z);
-        //fScale = Mathf.Clamp(fScale, 0.0f, 1.0f);
-        //objProgressbar.transform.localScale = new Vector3(fScale, fScale, fScale);
+        Vector3 screenPos = Camera.main.WorldToScreenPoint(Pos);
+        if (screenPos.z >= 0.0f && screenPos.z <= 20.0f)
+        {
+            objProgressbar.SetActive(true);
+            objProgressbar.transform.position = screenPos;
+            objProgressbar.transform.localScale = new Vector3(fScale, fScale, fScale);
+        }
+        else
+        {
+            objProgressbar.SetActive(false);
+        }
 
         //Vector3 Pos = Target.transform.position;
         //Pos.y += fMoveY;
@@ -56,17 +54,17 @@ public class Progressbar : MonoBehaviour
         //{
         //    objProgressbar.SetActive(true);
 
-        ////     거리에 따른 사이즈 조절
-        ////    float fScale = uiCamera.scaledPixelWidth - uiPos.z / uiCamera.scaledPixelWidth;
-        ////    fScale = Mathf.Clamp(fScale, 0.0f, 1.0f);
+        //    // 거리에 따른 사이즈 조절
+        //    //float fScale = uiCamera.scaledPixelWidth - uiPos.z / uiCamera.scaledPixelWidth;
+        //    //fScale = Mathf.Clamp(fScale, 0.0f, 1.0f);
 
-        //    float fScale = Mathf.InverseLerp(0, 1.0f, 1.0f - uiPos.z);
-        //    fScale = Mathf.Clamp(fScale, 0.0f, 1.0f);
+        //    float scale = Mathf.InverseLerp(0, 1.0f, 1.0f - uiPos.z);
+        //    scale = Mathf.Clamp(fScale, 0.0f, 1.0f);
 
-        //    objProgressbar.transform.localScale = new Vector3(fScale, fScale, fScale);
+        //    objProgressbar.transform.localScale = new Vector3(scale, scale, scale);
 
         //    uiPos.z = 0.0f;
-        //    objProgressbar.transform.position = tf.InverseTransformPoint(uiPos);// tf.TransformVector(uiPos);//.TransformPoint(uiPos);
+        //    objProgressbar.transform.position = Camera.main.ScreenToWorldPoint(uiPos);
         //}
 
         //else

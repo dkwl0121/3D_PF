@@ -32,14 +32,11 @@ public class PlayerControl : IChracterControl
         eCharType = E_CHARACTER_TYPE.PLAYER;
         eEnemyLayer = E_LAYER_TYPE.ENEMY;
         attackFunc.eEnemyLayer = eEnemyLayer;
-        
+
+        Stat = PlayerManager.Instace.LoadData();
+
         //====================================================================================
         //vDestPos = GameObject.Find("Dest").transform.position;
-    }
-
-    private void Start()
-    {
-        Stat = PlayerManager.Instace.LoadData();
     }
 
     private new void OnEnable()
@@ -48,7 +45,7 @@ public class PlayerControl : IChracterControl
 
         AutoButton.SetActive(true);
     }
-
+    
     private void OnDestroy()
     {
         PlayerManager.Instace.SaveData();
@@ -65,6 +62,9 @@ public class PlayerControl : IChracterControl
 
             return;
         }
+
+        // 레벨 업 체크!!
+        CheckLevelUp();
 
         if (attackFunc.isAttack)
         {
@@ -95,15 +95,18 @@ public class PlayerControl : IChracterControl
 
         isCoolTime = false;
 
-        if (Stat.fCurrHP < Stat.fMaxHP)
+        if (!Stat.isDead && this.gameObject)
         {
-            Stat.fCurrHP += Stat.fUpHp;
-            Stat.fCurrHP = Mathf.Clamp(Stat.fCurrHP, 0, Stat.fMaxHP);
-        }
-        if (Stat.fCurrMP < Stat.fMaxMP)
-        {
-            Stat.fCurrMP += Stat.fUpMp;
-            Stat.fCurrMP = Mathf.Clamp(Stat.fCurrMP, 0, Stat.fMaxMP);
+            if (Stat.fCurrHP < Stat.fMaxHP)
+            {
+                Stat.fCurrHP += Stat.fUpHp;
+                Stat.fCurrHP = Mathf.Clamp(Stat.fCurrHP, 0, Stat.fMaxHP);
+            }
+            if (Stat.fCurrMP < Stat.fMaxMP)
+            {
+                Stat.fCurrMP += Stat.fUpMp;
+                Stat.fCurrMP = Mathf.Clamp(Stat.fCurrMP, 0, Stat.fMaxMP);
+            }
         }
     }
     
@@ -129,7 +132,7 @@ public class PlayerControl : IChracterControl
         {
             if (fCurrMoveSpeed > 0.0f)
             {
-                fCurrMoveSpeed -= Time.deltaTime * fMoveSpeed;
+                fCurrMoveSpeed -= fMoveSpeed * 2.0f * Time.deltaTime;
                 fCurrMoveSpeed = Mathf.Clamp(fCurrMoveSpeed, 0.0f, fMoveSpeed);
                 transform.Translate(Vector3.forward * fCurrMoveSpeed * Time.deltaTime);
             }
@@ -183,14 +186,28 @@ public class PlayerControl : IChracterControl
         // 이동 방향으로 회전
         transform.rotation = Quaternion.LookRotation(vLookRot, Vector3.up);
 
-        // 이동
-        if (fCurrMoveSpeed < fMoveSpeed)
-        {
-            fCurrMoveSpeed += Time.deltaTime * fMoveSpeed;
-            fCurrMoveSpeed = Mathf.Clamp(fCurrMoveSpeed, 0.0f, fMoveSpeed);
-        }
+        fCurrMoveSpeed = fDistance * fMoveSpeed;
 
-        transform.Translate(Vector3.forward * fDistance * fCurrMoveSpeed * Time.deltaTime);
+        //// 이동
+        //if (fCurrMoveSpeed < fMoveSpeed)
+        //{
+        //    fCurrMoveSpeed = fMoveSpeed;
+        //    fCurrMoveSpeed += Time.deltaTime * fMoveSpeed;
+        //    fCurrMoveSpeed = Mathf.Clamp(fCurrMoveSpeed, 0.0f, fMoveSpeed);
+        //}
+
+        transform.Translate(Vector3.forward * fCurrMoveSpeed * Time.deltaTime);
+    }
+
+    private void CheckLevelUp()
+    {
+        if (!PlayerManager.Instace.Levelup) return;
+
+        PlayerManager.Instace.Levelup = false;
+
+        ((PlayerAttackFunction)attackFunc).SetAttButtonEnable();
+        GameObject objMessage = Instantiate(Resources.Load(Util.ResourcePath.UI_MESSAGE)) as GameObject;
+        objMessage.GetComponent<Message>().SetText(Color.green, LevelDBManager.Instace.GetLevelUpTip(Stat.nLevel));
     }
     
     private void AutoOn()

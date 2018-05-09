@@ -16,15 +16,15 @@ public class MushroomControl : IChracterControl
 
         HPbar = this.GetComponent<Progressbar>();
         HPbar.Target = this.gameObject;
-        HPbar.fMoveY = 1.0f;
+        HPbar.fMoveY = 2.0f;
         HPbar.fScale = 0.5f;
 
-        fFreeMoveDist = 4.0f;
-        fSearchDist = 4.0f;
-        fAttackDist = 1.0f;
+        fFreeMoveDist = 8.0f;
+        fSearchDist = 6.0f;
+        fAttackDist = 2.0f;
         navMesh.stoppingDistance = fAttackDist;
 
-        fMoveSpeed = 0.5f;
+        fMoveSpeed = 1.5f;
         navMesh.speed = fMoveSpeed;
         
         eEnemyLayer = E_LAYER_TYPE.PLAYER;

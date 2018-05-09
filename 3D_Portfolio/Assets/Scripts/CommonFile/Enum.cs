@@ -8,8 +8,8 @@ public enum E_SCENE_NO
     TITLE,
     ROBBY,
     TOWN,
-    SHOP,
     DUNGEON,
+    LOADING,
     MAX
 }
 
@@ -20,20 +20,22 @@ public enum E_CHARACTER_TYPE
     MUSHROOM_01,
     MUSHROOM_02,
     MUSHROOM_03,
+    STONE_MONSTER,
+    PUMPKIN,
     MAX
 }
 
-public enum E_CHARACTER_STAT
-{
-    INVALID = (-1),
-    IDLE,
-    RUN,
-    ATTACK,
-    SKILL_01,
-    SKILL_02,
-    JUMP,
-    MAX
-}
+//public enum E_CHARACTER_STAT
+//{
+//    INVALID = (-1),
+//    IDLE,
+//    RUN,
+//    ATTACK,
+//    SKILL_01,
+//    SKILL_02,
+//    JUMP,
+//    MAX
+//}
 
 public enum E_PLAYER_ATTACK_NO
 {

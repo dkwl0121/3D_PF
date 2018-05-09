@@ -22,12 +22,17 @@ public class LevelDBManager
 
     public void Setup()
     {
-        levelDB = Resources.Load<level>("DB/Level");
+        levelDB = Resources.Load<level>(Util.ResourcePath.DB_LEVEL);
+    }
+
+    public int GetMaxLevel()
+    {
+        return levelDB.dataArray.Length;
     }
 
     public void SetStat(CharacterStat stat, int level)
     {
-        if (level <= 0 || level >= levelDB.dataArray.Length) return;
+        if (level <= 0 || level > levelDB.dataArray.Length) return;
 
         stat.fMaxHP = levelDB.dataArray[level - 1].Maxhp;
         stat.fMaxMP = levelDB.dataArray[level - 1].Maxmp;
@@ -40,5 +45,10 @@ public class LevelDBManager
         stat.fUpHp = levelDB.dataArray[level - 1].Uphp;
         stat.fUpMp = levelDB.dataArray[level - 1].Upmp;
         stat.fCoolTime = levelDB.dataArray[level - 1].Cooltime;
+    }
+
+    public string GetLevelUpTip(int level)
+    {
+        return levelDB.dataArray[level - 1].Leveluptip;
     }
 }

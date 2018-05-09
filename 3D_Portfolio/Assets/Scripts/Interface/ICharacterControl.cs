@@ -21,6 +21,7 @@ public class CharacterStat
     public float fUpMp = 0;
     public float fCoolTime = 0;
     public bool isDead = false;
+    public int nMoney = 0;
 }
 
 [RequireComponent(typeof(NavMeshAgent))]
@@ -39,6 +40,7 @@ public class IChracterControl : MonoBehaviour
     protected IAttackFunction attackFunc = null;        // 공격 함수 클래스
     
     protected Vector3 vDestPos;
+    protected Quaternion qDestRot;
     protected GameObject objTarget = null;              // 타겟
 
     protected float fSearchDist = 0;
@@ -69,8 +71,11 @@ public class IChracterControl : MonoBehaviour
     {
         Stat.isDead = false;
         anim.enabled = true;
-        Stat.fCurrHP = Stat.fMaxHP;
-        Stat.fCurrMP = Stat.fMaxMP;
+        if (eCharType != E_CHARACTER_TYPE.PLAYER)
+        {
+            Stat.fCurrHP = Stat.fMaxHP;
+            Stat.fCurrMP = Stat.fMaxMP;
+        }
     }
 
     protected void CheckEnemy()
@@ -115,7 +120,7 @@ public class IChracterControl : MonoBehaviour
 
     public float GetManaValue()
     {
-        float fManaValue = 5 * Stat.nLevel;
+        float fManaValue = 3 * Stat.nLevel;
 
         return fManaValue;
     }
@@ -133,25 +138,34 @@ public class IChracterControl : MonoBehaviour
             fDamge = 0;
         else
         {
+            if (fDamge > Stat.fCurrHP)
+                fDamge = Stat.fCurrHP;
+
             Stat.fCurrHP -= fDamge;
-            Mathf.Clamp(Stat.fCurrHP, 0, Stat.fMaxHP);
-            
+
             if (!attackFunc.isAttack)
                 anim.SetTrigger(Util.AnimParam.DAMAGE);
 
             if (Stat.fCurrHP <= 0)
-            {
-                if (eCharType != E_CHARACTER_TYPE.PLAYER)
-                    PlayerManager.Instace.AddExp(Stat.fMaxExp);
+            {  
                 StartDie();
             }
         }
 
-        // 깍이는 값 보여주기
+        // 깍이는 데미지 값 보여주기
+        if (eCharType == E_CHARACTER_TYPE.PLAYER)
+            DamageValuePool.Instace.ShowDamage(this.transform.position, -fDamge, true);
+        else
+            DamageValuePool.Instace.ShowDamage(this.transform.position, fDamge, false);
     }
 
     private void StartDie()
     {
+        if (eCharType != E_CHARACTER_TYPE.PLAYER)
+        {
+            PlayerManager.Instace.AddExp(Stat.fMaxExp);
+            PlayerManager.Instace.AddMoney(Stat.nMoney);
+        }
         Stat.isDead = true;
         attackFunc.ResetAttack();
         anim.SetTrigger(Util.AnimParam.DEATH);

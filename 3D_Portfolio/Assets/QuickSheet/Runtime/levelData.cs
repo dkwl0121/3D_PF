@@ -56,4 +56,8 @@ public class levelData
   float cooltime;
   public float Cooltime { get {return cooltime; } set { cooltime = value;} }
   
+  [SerializeField]
+  string leveluptip;
+  public string Leveluptip { get {return leveluptip; } set { leveluptip = value;} }
+  
 }

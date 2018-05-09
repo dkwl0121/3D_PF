@@ -1,0 +1,40 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f28634b3ad2f06649bc2c6443dfa6ca4, type: 3}
+  m_Name: Dungeon
+  m_EditorClassIdentifier: 
+  SheetName: 3D_PF_DB
+  WorksheetName: dungeon
+  dataArray:
+  - no: 1
+    pos1: 0
+    pos2: -1
+    pos3: 1
+    pos4: -1
+    pos5: 2
+    pos6: -1
+    pos7: -1
+  - no: 2
+    pos1: 0
+    pos2: -1
+    pos3: 1
+    pos4: 2
+    pos5: 3
+    pos6: 2
+    pos7: 2
+  - no: 3
+    pos1: 0
+    pos2: 1
+    pos3: 2
+    pos4: 3
+    pos5: 4
+    pos6: 3
+    pos7: 3

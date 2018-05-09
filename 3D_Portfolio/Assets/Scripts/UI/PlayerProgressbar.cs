@@ -11,7 +11,13 @@ public class PlayerProgressbar : MonoBehaviour
     public Text txtHpValue;
     public Image imgMpGauge;
     public Image imgExpGauge;
-    
+
+    private void Awake()
+    {
+        // 만약에 HP가 적은 상태일 때 깍이는 모습으로 연출 될 수 있기 때문에
+        imgHPBackGauge.fillAmount = 0.0f;
+    }
+
     public void SetStatUI(CharacterStat stat)
     {
         txtLevel.text = stat.nLevel.ToString();

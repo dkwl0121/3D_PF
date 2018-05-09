@@ -19,11 +19,12 @@ public class CameraControl : MonoBehaviour
     private float fMaxDist;
     private bool isShake = false;
 
-    private void Awake()
+    private void Start()
     {
         vPlusPos = new Vector3(0, PosY, PosZ);
         vRotation = new Vector3(RotX, 0, 0);
-        objPlayer = GameObject.FindGameObjectWithTag(Util.Tag.PLAYER);
+        GameObject objPlayPack = GameObject.FindGameObjectWithTag(Util.Tag.PLAY_PACK);
+        objPlayer = objPlayPack.transform.Find(Util.Tag.PLAYER).gameObject;
         objTarget = objPlayer;
         this.transform.position = objTarget.transform.position + vPlusPos;
         this.transform.eulerAngles = vRotation;

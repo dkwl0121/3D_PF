@@ -18,6 +18,29 @@ public class CommonFunction
             if (ctrl != null)
                 ctrl.GetDamage(fDamge);
         }
+        else if (objEneny.CompareTag(Util.Tag.STONE_MONSTER))
+        {
+            StoneMonsterControl ctrl = objEneny.GetComponent<StoneMonsterControl>();
+            if (ctrl != null)
+                ctrl.GetDamage(fDamge);
+        }
+        else if (objEneny.CompareTag(Util.Tag.PUMPKIN))
+        {
+            PumpkinControl ctrl = objEneny.GetComponent<PumpkinControl>();
+            if (ctrl != null)
+                ctrl.GetDamage(fDamge);
+        }
+    }
+
+    public static void ExitGame()
+    {
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+#elif UNITY_WEBPLAYER
+        Application.OpenURL("http://google.com");
+#else
+        Application.Quit();
+#endif
     }
 
     //// 코사인함수를 활용한 보간

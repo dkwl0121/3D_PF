@@ -51,11 +51,20 @@ public class EnemyPool : MonoBehaviour
                         arrObjEnemy[i] = Resources.Load(Util.ResourcePath.MUSHROOM_03) as GameObject;
                     }
                     break;
+                case E_CHARACTER_TYPE.STONE_MONSTER:
+                    {
+                        arrObjEnemy[i] = Resources.Load(Util.ResourcePath.STONE_MONSTER) as GameObject;
+                    }
+                    break;
+                case E_CHARACTER_TYPE.PUMPKIN:
+                    {
+                        arrObjEnemy[i] = Resources.Load(Util.ResourcePath.PUMPKIN) as GameObject;
+                    }
+                    break;
             }
         }
 
         arrTfParent = new Transform[arrObjEnemy.Length];
-        //Transform tfParent = new GameObject("EnemyPool").transform;
         for (int i = 0; i < arrObjEnemy.Length; ++i)
         {
             switch ((E_CHARACTER_TYPE)i)
@@ -73,6 +82,16 @@ public class EnemyPool : MonoBehaviour
                 case E_CHARACTER_TYPE.MUSHROOM_03:
                     {
                         arrTfParent[i] = new GameObject(Util.ResourcePath.MUSHROOM_03).transform;
+                    }
+                    break;
+                case E_CHARACTER_TYPE.STONE_MONSTER:
+                    {
+                        arrTfParent[i] = new GameObject(Util.ResourcePath.STONE_MONSTER).transform;
+                    }
+                    break;
+                case E_CHARACTER_TYPE.PUMPKIN:
+                    {
+                        arrTfParent[i] = new GameObject(Util.ResourcePath.PUMPKIN).transform;
                     }
                     break;
             }
@@ -144,7 +163,7 @@ public class EnemyPool : MonoBehaviour
     {
         for (int i = 0; i < arrEnemyPool.Length; ++i)
         {
-            for (int j = 0; j < nPoolNum; ++j)
+            for (int j = 0; j < arrEnemyPool[i].Count; ++j)
             {
                 arrEnemyPool[i][j].SetActive(false);
             }

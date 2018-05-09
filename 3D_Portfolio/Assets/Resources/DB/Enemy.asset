@@ -15,30 +15,42 @@ MonoBehaviour:
   WorksheetName: enemy
   dataArray:
   - no: 1
-    name: green mushroom
+    name: Green Mushroom
     maxhp: 50
     maxmp: 0
     att: 15
     def: 5
     exp: 20
+    coin: 20
   - no: 2
-    name: blue mushroom
+    name: Blue Mushroom
     maxhp: 100
     maxmp: 0
     att: 20
     def: 10
     exp: 30
+    coin: 30
   - no: 3
-    name: red mushroom
+    name: Red Mushroom
     maxhp: 150
     maxmp: 0
     att: 25
     def: 15
     exp: 40
+    coin: 40
   - no: 4
-    name: fire monster
+    name: Stone Monster
     maxhp: 200
     maxmp: 0
     att: 30
     def: 20
     exp: 50
+    coin: 50
+  - no: 5
+    name: Pumpkin
+    maxhp: 300
+    maxmp: 100
+    att: 35
+    def: 25
+    exp: 100
+    coin: 100
