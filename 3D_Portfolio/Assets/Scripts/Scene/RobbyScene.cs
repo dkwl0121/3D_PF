@@ -7,6 +7,9 @@ public class RobbyScene : MonoBehaviour
 {
     public void Awake()
     {
+        // 셋업을 한번만 함.
+        if (GameManager.Instace.Created) return;
+        GameManager.Instace.Setup();
         LevelDBManager.Instace.Setup();
         EnemyDBManager.Instace.Setup();
         DungeonDBManager.Instace.Setup();
@@ -35,7 +38,6 @@ public class RobbyScene : MonoBehaviour
 
     private void LoadTownScene()
     {
-        SceneCtrlManager.Instace.SetNextScene(E_SCENE_NO.TOWN);
-        SceneCtrlManager.Instace.ChangeScene();
+        SceneCtrlManager.Instace.ChangeScene(E_SCENE_NO.TOWN);
     }
 }

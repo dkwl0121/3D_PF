@@ -18,11 +18,16 @@ public class PlayerManager
     }
 
     private CharacterStat PlayerStat;
+
+    private E_DUNGEON_NO eCurrDungeonNo;
+    public E_DUNGEON_NO CurrDungeonNo { get { return eCurrDungeonNo; } }
+
     private bool isNewGame;
     public bool NewGame { set { isNewGame = value; } }
+
     private bool isLevelUp;
     public bool Levelup { get { return isLevelUp; } set { isLevelUp = value; } }
-
+    
     public void Setup()
     {
         PlayerStat = new CharacterStat();
@@ -37,13 +42,14 @@ public class PlayerManager
             PlayerStat.fCurrMP = PlayerPrefs.GetInt("fCurrMP");
             PlayerStat.fCurrExp = PlayerPrefs.GetInt("fCurrExp");
             PlayerStat.nMoney = PlayerPrefs.GetInt("nMoney");
+            eCurrDungeonNo = (E_DUNGEON_NO)PlayerPrefs.GetInt("eCurrDungeonNo");
 
             // 전체적인 스텟 셋팅
             SetStat();
         }
         else
         {
-            PlayerStat.nLevel = 6;
+            PlayerStat.nLevel = 1;
 
             // 전체적인 스텟 셋팅
             SetStat();
@@ -52,6 +58,7 @@ public class PlayerManager
             PlayerStat.fCurrMP = PlayerStat.fMaxMP;
             PlayerStat.nMoney = 0;
             PlayerStat.fCurrExp = 0;
+            eCurrDungeonNo = E_DUNGEON_NO.DUNGEON_01;
         }
 
         return PlayerStat;
@@ -65,6 +72,7 @@ public class PlayerManager
         PlayerPrefs.SetInt("fCurrMP", (int)PlayerStat.fCurrMP);
         PlayerPrefs.SetInt("fCurrExp", (int)PlayerStat.fCurrExp);
         PlayerPrefs.SetInt("nMoney", (int)PlayerStat.nMoney);
+        PlayerPrefs.SetInt("eCurrDungeonNo", (int)eCurrDungeonNo);
 
         PlayerPrefs.Save();
     }
@@ -118,5 +126,18 @@ public class PlayerManager
     public int GetCurrLevel()
     {
         return PlayerStat.nLevel;
+    }
+
+    public void ClearDungeon(E_DUNGEON_NO eDun)
+    {
+        if (eDun < eCurrDungeonNo || eDun == E_DUNGEON_NO.MAX - 1) return;
+
+        ++eCurrDungeonNo;
+    }
+
+    public void SetWin()
+    {
+        AddMoney(DungeonDBManager.Instace.GetWinCoin());
+        AddExp(DungeonDBManager.Instace.GetWinExp());
     }
 }

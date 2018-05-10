@@ -27,10 +27,7 @@ public class TitleScene : MonoBehaviour
         else if (fDuration < fFadeSecond)
             color.a = 1.0f - (fFadeSecond - fDuration) / (fFadeSecond * 0.3f);
         else
-        {
-            SceneCtrlManager.Instace.SetNextScene(E_SCENE_NO.ROBBY);// 씬 전환
-            SceneCtrlManager.Instace.ChangeScene();
-        }
+            SceneCtrlManager.Instace.ChangeScene(E_SCENE_NO.ROBBY);
 
         imgFade.color = color;
     }

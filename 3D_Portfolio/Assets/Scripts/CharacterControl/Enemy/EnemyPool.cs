@@ -115,7 +115,7 @@ public class EnemyPool : MonoBehaviour
         }
     }
 
-    public GameObject ActiveEnemy(E_CHARACTER_TYPE eType, Vector3 pos, Quaternion rot)
+    public GameObject ActiveEnemy(E_CHARACTER_TYPE eType, Vector3 pos, Quaternion rot, bool isFixed)
     {
         if (eType <= E_CHARACTER_TYPE.INVALID || eType >= E_CHARACTER_TYPE.MAX) return null;
 
@@ -127,6 +127,8 @@ public class EnemyPool : MonoBehaviour
         objActive.transform.position = pos;
         objActive.transform.rotation = rot;
         objActive.SetActive(true);
+        // 윗줄에서 활성활를 시켜야지 겟컴퍼넌트로 찾을 수 있음!!!
+        objActive.GetComponent<EnemyControl>().isFixed = isFixed;
 
         return objActive;
     }

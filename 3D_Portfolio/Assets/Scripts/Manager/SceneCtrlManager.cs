@@ -49,18 +49,11 @@ public class SceneCtrlManager
         currSceneNo = E_SCENE_NO.TITLE;
         nextSceneNo = E_SCENE_NO.TITLE;
     }
-
-    public void SetNextScene(E_SCENE_NO eSceneNo)
+    
+    public void ChangeScene(E_SCENE_NO eSceneNo)
     {
-        nextSceneNo = eSceneNo;
-    }
-
-    public void ChangeScene()
-    {
-        if (currSceneNo == E_SCENE_NO.DUNGEON)
-            EnemyPool.Instace.DisableAll();
-
         prevSceneNo = currSceneNo;
+        nextSceneNo = eSceneNo;
         currSceneNo = nextSceneNo;
         SceneManager.LoadScene((int)E_SCENE_NO.LOADING);
     }

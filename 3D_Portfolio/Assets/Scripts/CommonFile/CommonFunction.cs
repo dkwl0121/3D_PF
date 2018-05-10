@@ -43,15 +43,13 @@ public class CommonFunction
 #endif
     }
 
-    //// 코사인함수를 활용한 보간
-    //public static float GetCosInterpolate(float fLenght, float fT)
-    //{
-    //    return fLenght * (Mathf.Sin(fT * Mathf.PI) + 1.0f) * 0.5f;    //cos()값이  -1 ~ 1 사이의 숫자가 나옴 0 ~ 1 사이값으로 변경 후 계산!
-    //}
-
     //// 보간
-    //public static float GetInterpolate(float fLenght, float fT)
+    //public static Vector3 GetInterpolate(Vector3 v1, Vector3 v2, float fT)
     //{
-    //    return fLenght * fT;
+    //    Vector3 vResult = Vector3.zero;
+
+    //    //vResult = (v1 - v2) * fT;
+
+    //    return vResult;
     //}
 }

@@ -15,6 +15,8 @@ public class JoyStickControl : MonoBehaviour, IDragHandler, IPointerUpHandler, I
     public RectTransform background;
     public RectTransform handle;
 
+    private bool isClick;
+
     public float Horizontal { get { return inputVector.x; } }
     public float Vertical { get { return inputVector.y; } }
 
@@ -23,11 +25,19 @@ public class JoyStickControl : MonoBehaviour, IDragHandler, IPointerUpHandler, I
 
     private void Awake()
     {
+        isClick = false;
         joystickPosition = RectTransformUtility.WorldToScreenPoint(cam, background.position);
+    }
+
+    private void OnDisable()
+    {
+        inputVector = Vector2.zero;
+        handle.anchoredPosition = Vector2.zero;
     }
 
     public void OnDrag(PointerEventData eventData)
     {
+        if (!isClick) return;
         Vector2 direction = eventData.position - joystickPosition;
         inputVector = (direction.magnitude > background.sizeDelta.x / 2f) ? direction.normalized : direction / (background.sizeDelta.x / 2f);
         fDistance = inputVector.magnitude;
@@ -36,11 +46,13 @@ public class JoyStickControl : MonoBehaviour, IDragHandler, IPointerUpHandler, I
 
     public void OnPointerDown(PointerEventData eventData)
     {
+        isClick = true;
         OnDrag(eventData);
     }
 
     public void OnPointerUp(PointerEventData eventData)
     {
+        isClick = false;
         inputVector = Vector2.zero;
         handle.anchoredPosition = Vector2.zero;
     }

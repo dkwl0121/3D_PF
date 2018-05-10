@@ -5,9 +5,10 @@ using UnityEngine;
 public class TownScene : MonoBehaviour
 {
     public Transform tfFromRobby;
-    //public Transform tfFromShop;
-    //public Transform tfDungeon1;
-
+    public Transform tfToRobby;
+    public Transform tfFromDungeon;
+    public Transform tfToDungeon;
+    
     private GameObject objPlayer = null;
     private GameObject objPlayPack = null;
 
@@ -30,28 +31,15 @@ public class TownScene : MonoBehaviour
         
         objPlayer = objPlayPack.transform.Find(Util.Tag.PLAYER).gameObject;
         
-        SetPlayerPos();
-
-        SceneCtrlManager.Instace.SetNextScene(E_SCENE_NO.DUNGEON);
-        SceneCtrlManager.Instace.ChangeScene();
+        SetPlayerPos(SceneCtrlManager.Instace.PrevSceneNo);
     }
 
-    private void OnDestroy()
-    {
-        // 로비씬으로 나가는 거면 저장하고 디스트로이
-        int cnt = objPlayPack.transform.childCount;
-        for (int i = 0; i < cnt; ++i)
-        {
-            objPlayPack.transform.GetChild(i).gameObject.SetActive(false);
-        }
-    }
-
-    private void SetPlayerPos()
+    private void SetPlayerPos(E_SCENE_NO eType)
     {
         // 네브매쉬 때문에 정확한 이동이 되지 않아서..
         objPlayer.SetActive(false);
 
-        switch (SceneCtrlManager.Instace.PrevSceneNo)
+        switch (eType)
         {
             case E_SCENE_NO.ROBBY:
                 {
@@ -60,16 +48,42 @@ public class TownScene : MonoBehaviour
                 break;
             case E_SCENE_NO.DUNGEON:
                 {
-                    objPlayer.transform.SetPositionAndRotation(tfFromRobby.position, tfFromRobby.rotation);
-                }
-                break;
-            default:
-                {
-                    objPlayer.transform.SetPositionAndRotation(tfFromRobby.position, tfFromRobby.rotation);
+                    objPlayer.transform.SetPositionAndRotation(tfFromDungeon.position, tfFromDungeon.rotation);
                 }
                 break;
         }
 
         objPlayer.SetActive(true);
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if ((tfToRobby.position - objPlayer.transform.position).magnitude < 5.0f)
+        {
+            Destroy(objPlayPack);
+            SceneCtrlManager.Instace.ChangeScene(E_SCENE_NO.ROBBY);
+        }
+        else if ((tfToDungeon.position - objPlayer.transform.position).magnitude < 5.0f)
+        {
+            // 이미 팝업이 열려 있다면
+            if (GameManager.Instace.Popup) return;
+
+            SetPlayerPos(E_SCENE_NO.DUNGEON);
+            Instantiate(Resources.Load(Util.ResourcePath.POPUP_DUNGEON));
+        }
+    }
+
+    private void Update()
+    {
+        // 게임을 시작 해야 하면
+        if (GameManager.Instace.GameStart)
+        {
+            int cnt = objPlayPack.transform.childCount;
+            for (int i = 0; i < cnt; ++i)
+            {
+                objPlayPack.transform.GetChild(i).gameObject.SetActive(false);
+            }
+            SceneCtrlManager.Instace.ChangeScene(E_SCENE_NO.DUNGEON);
+        }
     }
 }

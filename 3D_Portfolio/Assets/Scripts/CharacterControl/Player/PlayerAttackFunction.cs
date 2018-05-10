@@ -120,8 +120,8 @@ public class PlayerAttackFunction : IAttackFunction
     {
         CoolTimeUpdate();
 
-        // 죽었으면
-        if (CharacterCtrl.Stat.isDead)
+        // 죽었거나 퍼포먼스 중이면
+        if (CharacterCtrl.Stat.isDead || GameManager.Instace.Performance)
         {
             for (int i = 0; i < stAttackBtn.Length; ++i)
             {
@@ -134,7 +134,7 @@ public class PlayerAttackFunction : IAttackFunction
 
             return;
         }
-        
+
         // 공격 여부에 따라 버튼(front) 활성화 설정
         for (int i = 0; i < stAttackBtn.Length; ++i)
         {
@@ -147,7 +147,7 @@ public class PlayerAttackFunction : IAttackFunction
             else
                 stAttackBtn[i].imgFront.gameObject.SetActive(true);
         }
-
+        
         KeyControl();
     }
 

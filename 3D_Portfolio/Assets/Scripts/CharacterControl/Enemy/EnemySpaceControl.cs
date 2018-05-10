@@ -9,6 +9,7 @@ public class EnemySpaceControl : MonoBehaviour
     public int nRecreateSeconds;
     public bool isRecreate;
     public bool isFixedRot;
+    public bool isFixed = false;
 
     private List<GameObject> lstEnemy;
 
@@ -22,24 +23,23 @@ public class EnemySpaceControl : MonoBehaviour
         {
             if (isFixedRot)
                 lstEnemy.Add(EnemyPool.Instace.ActiveEnemy(
-                    eEnemyNo, this.transform.position, this.transform.rotation));
+                    eEnemyNo, this.transform.position, this.transform.rotation, isFixed));
             else
                 lstEnemy.Add(EnemyPool.Instace.ActiveEnemy(
-                    eEnemyNo, this.transform.position, Quaternion.Euler(Random.Range(0, 360), 0, Random.Range(0, 360))));
+                    eEnemyNo, this.transform.position, Quaternion.Euler(Random.Range(0, 360), 0, Random.Range(0, 360)), isFixed));
         }
     }
 
     private void Update()
     {
-        if (!isRecreate) return;
-
         for (int i = 0; i < lstEnemy.Count; ++i)
         {
-            // 비활성화 되었다면 지우고 일정 시간 경과 후 생성
+            // 비활성화 되었다면 지우고
             if (!lstEnemy[i].activeSelf)
             {
                 lstEnemy.RemoveAt(i);
-                StartCoroutine(Recreate());
+                if (isRecreate) 
+                    StartCoroutine(Recreate()); //일정 시간 경과 후 생성
             }
         }
     }
@@ -49,6 +49,11 @@ public class EnemySpaceControl : MonoBehaviour
         yield return new WaitForSeconds(nRecreateSeconds);
 
         lstEnemy.Add(EnemyPool.Instace.ActiveEnemy(
-            eEnemyNo, this.transform.position, Quaternion.Euler(Random.Range(0, 360), 0, Random.Range(0, 360))));
+            eEnemyNo, this.transform.position, Quaternion.Euler(Random.Range(0, 360), 0, Random.Range(0, 360)), isFixed));
+    }
+
+    public bool IsDie()
+    {
+        return lstEnemy.Count == 0;
     }
 }

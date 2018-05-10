@@ -180,8 +180,13 @@ public class IChracterControl : MonoBehaviour
 
     private IEnumerator DelayDie()
     {
-        yield return new WaitForSeconds(2.0f);
+        yield return new WaitForSeconds(1.0f);
 
         this.gameObject.SetActive(false);
+
+        if (eCharType == E_CHARACTER_TYPE.PLAYER)
+        {
+            Stat.fCurrHP = 10;
+        }
     }
 }

@@ -49,6 +49,10 @@ namespace Util
         public static readonly string PT_PUMPKIN_ATTACK = "Particle/Pumpkin_Attack";
         public static readonly string PT_PUMPKIN_SKILL_01 = "Particle/Pumpkin_Skill_01";
 
+        public static readonly string POPUP_DUNGEON = "Popup/DungeonPopup";
+        public static readonly string POPUP_WIN = "Popup/WinPopup";
+        public static readonly string POPUP_LOSE = "Popup/LosePopup";
+
         public static readonly string PLAY_PACK = "PlayPack";
     }
 

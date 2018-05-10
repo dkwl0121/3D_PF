@@ -22,6 +22,8 @@ MonoBehaviour:
     pos5: 2
     pos6: -1
     pos7: -1
+    coin: 100
+    exp: 20
   - no: 2
     pos1: 0
     pos2: -1
@@ -30,6 +32,8 @@ MonoBehaviour:
     pos5: 3
     pos6: 2
     pos7: 2
+    coin: 500
+    exp: 30
   - no: 3
     pos1: 0
     pos2: 1
@@ -38,3 +42,5 @@ MonoBehaviour:
     pos5: 4
     pos6: 3
     pos7: 3
+    coin: 1000
+    exp: 50

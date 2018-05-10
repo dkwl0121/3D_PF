@@ -45,7 +45,15 @@ public class PlayerControl : IChracterControl
 
         AutoButton.SetActive(true);
     }
-    
+
+    private void AllStop()
+    {
+        joystick.OnPointerUp(null);
+        fCurrMoveSpeed = 0.0f;
+        navMesh.ResetPath();
+        attackFunc.ResetAttack();
+    }
+
     private void OnDestroy()
     {
         PlayerManager.Instace.SaveData();
@@ -66,20 +74,43 @@ public class PlayerControl : IChracterControl
         // 레벨 업 체크!!
         CheckLevelUp();
 
-        if (attackFunc.isAttack)
+        // 퍼포먼스 중이면
+        if (GameManager.Instace.Performance)
         {
-            fCurrMoveSpeed = 0.0f;
-            navMesh.ResetPath();
+            AllStop();
+            return;
+        }
+
+        // 씬에 따라 오토 버튼 활성화 설정
+        if (SceneCtrlManager.Instace.CurrSceneNo == E_SCENE_NO.DUNGEON)
+        {
+            AutoButton.transform.parent.gameObject.SetActive(true);
         }
         else
         {
-            MoveControl();
+            AutoOff();
+            AutoButton.transform.parent.gameObject.SetActive(false);
+        }
 
-            if (isAuto)
-                AutoControl();
+        if ((GameManager.Instace.Popup))
+            AllStop();
+        else
+        {
+            if (attackFunc.isAttack)
+            {
+                fCurrMoveSpeed = 0.0f;
+                navMesh.ResetPath();
+            }
+            else
+            {
+                MoveControl();
 
-            // 이동 값 설정
-            anim.SetFloat(Util.AnimParam.MOVE_SPEED, fCurrMoveSpeed / fMoveSpeed);
+                if (isAuto)
+                    AutoControl();
+
+                // 이동 값 설정
+                anim.SetFloat(Util.AnimParam.MOVE_SPEED, fCurrMoveSpeed / fMoveSpeed);
+            }
         }
 
         // 체력 채우기
@@ -217,10 +248,11 @@ public class PlayerControl : IChracterControl
         navMesh.ResetPath();
     }
 
-    private void AutoOff()
+    public void AutoOff()
     {
         isAuto = false;
         AutoButton.SetActive(true);
+        navMesh.velocity = Vector3.zero;
         navMesh.ResetPath();
     }
 
@@ -230,5 +262,10 @@ public class PlayerControl : IChracterControl
             AutoOff();
         else
             AutoOn();
+    }
+
+    public void SetDestPos(Vector3 Pos)
+    {
+        vDestPos = Pos;
     }
 }

@@ -79,11 +79,11 @@ public class DamageValuePool : MonoBehaviour
         listDamagePool.Add(newObject);
     }
 
-    public void DisableAll()
-    {
-        for (int i = 0; i < listDamagePool.Count; ++i)
-        {
-            listDamagePool[i].SetActive(false);
-        }
-    }
+    //public void DisableAll()
+    //{
+    //    for (int i = 0; i < listDamagePool.Count; ++i)
+    //    {
+    //        listDamagePool[i].SetActive(false);
+    //    }
+    //}
 }

@@ -18,6 +18,8 @@ public class CameraControl : MonoBehaviour
     private float fCurrDuration;
     private float fMaxDist;
     private bool isShake = false;
+    private Vector3 vBossPos;
+    private Vector3 vPrevPos;
 
     private void Start()
     {
@@ -33,6 +35,8 @@ public class CameraControl : MonoBehaviour
 
     private void Update()
     {
+        if (!objTarget) return;
+
         switch (eCtrlType)
         {
             case E_CAMERA_CTRL_TYPE.DEFAULT:
@@ -82,6 +86,40 @@ public class CameraControl : MonoBehaviour
                         eCtrlType = E_CAMERA_CTRL_TYPE.DEFAULT;
                 }
                 break;
+            case E_CAMERA_CTRL_TYPE.SHOW_BOSS:
+                {
+                    fCurrDuration += Time.deltaTime;
+                    
+                    if (fCurrDuration <= fCtrlDuration * 0.33f)
+                    {
+                        Vector3 vPos = vPrevPos;
+                        float fT = fCurrDuration / (fCtrlDuration * 0.33f);
+                        vPos += (vBossPos - vPrevPos) * fT;
+                        this.transform.position = vPos;
+
+                        Vector3 vRot = this.transform.eulerAngles;
+                        vRot.x = RotX + ((0 - RotX) * fT);
+                        this.transform.eulerAngles = vRot;
+                    }
+                    else if (fCurrDuration > fCtrlDuration * 0.66f)
+                    {
+                        Vector3 vPos = vPrevPos;
+                        float fT = (fCtrlDuration - fCurrDuration) / (fCtrlDuration * 0.33f);
+                        vPos += (vBossPos - vPrevPos) * fT;
+                        this.transform.position = vPos;
+
+                        Vector3 vRot = this.transform.eulerAngles;
+                        vRot.x = RotX + ((0 - RotX) * fT);
+                        this.transform.eulerAngles = vRot;
+                    }
+
+                    if (fCurrDuration >= fCtrlDuration)
+                    {
+                        eCtrlType = E_CAMERA_CTRL_TYPE.DEFAULT;
+                        GameManager.Instace.Performance = false;
+                    }
+                }
+                break;
         }
         
         // 플레이어 앞에 있는(가리는) 오브젝트 비활성화 시키기 -> 콜리더가 있는 것만 레이 캐스트가 됨....
@@ -108,6 +146,16 @@ public class CameraControl : MonoBehaviour
         fCurrDuration = 0.0f;
         fMaxDist = fDist;
         isShake = false;
+    }
+
+    // 보스 보여주기 모션
+    public void CameraCtrlForBoss(Transform tfBoss)
+    {
+        eCtrlType = E_CAMERA_CTRL_TYPE.SHOW_BOSS;
+        fCtrlDuration = 3.0f;
+        fCurrDuration = 0.0f;
+        vPrevPos = this.transform.position;
+        vBossPos = tfBoss.position + (tfBoss.forward * 4.0f) + (tfBoss.up * 1.0f);
     }
 
     private IEnumerator DelayShake()

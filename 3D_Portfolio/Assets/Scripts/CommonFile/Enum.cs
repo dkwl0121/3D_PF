@@ -25,17 +25,14 @@ public enum E_CHARACTER_TYPE
     MAX
 }
 
-//public enum E_CHARACTER_STAT
-//{
-//    INVALID = (-1),
-//    IDLE,
-//    RUN,
-//    ATTACK,
-//    SKILL_01,
-//    SKILL_02,
-//    JUMP,
-//    MAX
-//}
+public enum E_DUNGEON_NO
+{
+    INVALID = (-1),
+    DUNGEON_01,
+    DUNGEON_02,
+    DUNGEON_03,
+    MAX
+}
 
 public enum E_PLAYER_ATTACK_NO
 {
@@ -57,5 +54,6 @@ public enum E_CAMERA_CTRL_TYPE
 {
     DEFAULT,
     STRAIGHT,
-    SHAKE
+    SHAKE,
+    SHOW_BOSS
 }
