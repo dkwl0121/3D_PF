@@ -1,0 +1,64 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 715b337837920c34caa133ab33fbcc33, type: 3}
+  m_Name: Weapon
+  m_EditorClassIdentifier: 
+  SheetName: 3D_PF_DB
+  WorksheetName: weapon
+  dataArray:
+  - no: 1
+    name: Green Basic Staff
+    description: It's a basic weapon.
+    price: 1000
+    att: 1
+    inte: 1
+    iconloadpath: Icon/Weapon/Weapon_01
+    weaponloadpath: Weapon/Staff_01
+  - no: 2
+    name: Blue Basic Staff
+    description: Attack and Intelligence increased 1.1 times.
+    price: 2000
+    att: 1.1
+    inte: 1.1
+    iconloadpath: Icon/Weapon/Weapon_02
+    weaponloadpath: Weapon/Staff_02
+  - no: 3
+    name: Red Basic Staff
+    description: Attack and Intelligence increased 1.2 times.
+    price: 3000
+    att: 1.2
+    inte: 1.2
+    iconloadpath: Icon/Weapon/Weapon_03
+    weaponloadpath: Weapon/Staff_03
+  - no: 4
+    name: Green Special Staff
+    description: Attack and Intelligence increased 1.3 times.
+    price: 4000
+    att: 1.3
+    inte: 1.3
+    iconloadpath: Icon/Weapon/Weapon_04
+    weaponloadpath: Weapon/Staff_04
+  - no: 5
+    name: Blue Special Staff
+    description: Attack and Intelligence increased 1.4 times.
+    price: 5000
+    att: 1.4
+    inte: 1.4
+    iconloadpath: Icon/Weapon/Weapon_05
+    weaponloadpath: Weapon/Staff_05
+  - no: 6
+    name: Red Special Staff
+    description: Attack and Intelligence increased 1.5 times.
+    price: 6000
+    att: 1.5
+    inte: 1.5
+    iconloadpath: Icon/Weapon/Weapon_06
+    weaponloadpath: Weapon/Staff_06

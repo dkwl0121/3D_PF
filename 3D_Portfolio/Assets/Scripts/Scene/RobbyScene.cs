@@ -13,6 +13,7 @@ public class RobbyScene : MonoBehaviour
         LevelDBManager.Instace.Setup();
         EnemyDBManager.Instace.Setup();
         DungeonDBManager.Instace.Setup();
+        WeaponDBManager.Instace.Setup();
         FrameManager.Instace.Setup();
         PlayerManager.Instace.Setup();
         EnemyPool.Instace.Setup();
@@ -33,7 +34,7 @@ public class RobbyScene : MonoBehaviour
 
     public void Exit()
     {
-        CommonFunction.ExitGame();
+        Instantiate(Resources.Load(Util.ResourcePath.POPUP_EXIT));
     }
 
     private void LoadTownScene()

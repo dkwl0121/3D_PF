@@ -57,3 +57,9 @@ public enum E_CAMERA_CTRL_TYPE
     SHAKE,
     SHOW_BOSS
 }
+
+public enum E_SHOP_TAB
+{
+    WEAPON,
+    ITEM
+}

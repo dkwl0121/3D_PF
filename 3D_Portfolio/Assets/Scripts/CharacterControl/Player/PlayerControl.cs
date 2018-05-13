@@ -61,9 +61,6 @@ public class PlayerControl : IChracterControl
 
     private void Update()
     {
-        // 플레이어 스텟 UI 셋팅
-        StatBar.SetStatUI(Stat);
-
         if (Stat.isDead)
         {
             AutoButton.SetActive(false);
@@ -74,8 +71,8 @@ public class PlayerControl : IChracterControl
         // 레벨 업 체크!!
         CheckLevelUp();
 
-        // 퍼포먼스 중이면
-        if (GameManager.Instace.Performance)
+        // 움직이면 안 될 때
+        if (GameManager.Instace.NoMove)
         {
             AllStop();
             return;
@@ -92,25 +89,20 @@ public class PlayerControl : IChracterControl
             AutoButton.transform.parent.gameObject.SetActive(false);
         }
 
-        if ((GameManager.Instace.Popup))
-            AllStop();
+        if (attackFunc.isAttack)
+        {
+            fCurrMoveSpeed = 0.0f;
+            navMesh.ResetPath();
+        }
         else
         {
-            if (attackFunc.isAttack)
-            {
-                fCurrMoveSpeed = 0.0f;
-                navMesh.ResetPath();
-            }
-            else
-            {
-                MoveControl();
+            MoveControl();
 
-                if (isAuto)
-                    AutoControl();
+            if (isAuto)
+                AutoControl();
 
-                // 이동 값 설정
-                anim.SetFloat(Util.AnimParam.MOVE_SPEED, fCurrMoveSpeed / fMoveSpeed);
-            }
+            // 이동 값 설정
+            anim.SetFloat(Util.AnimParam.MOVE_SPEED, fCurrMoveSpeed / fMoveSpeed);
         }
 
         // 체력 채우기

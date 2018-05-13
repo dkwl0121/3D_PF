@@ -18,8 +18,10 @@ public class PlayerProgressbar : MonoBehaviour
         imgHPBackGauge.fillAmount = 0.0f;
     }
 
-    public void SetStatUI(CharacterStat stat)
+    public void Update()
     {
+        CharacterStat stat = PlayerManager.Instace.Stat;
+
         txtLevel.text = stat.nLevel.ToString();
         imgHpMainGauge.fillAmount = stat.fCurrHP / stat.fMaxHP;
         txtHpValue.text = stat.fCurrHP.ToString() + " / " + stat.fMaxHP.ToString();

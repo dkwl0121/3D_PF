@@ -34,4 +34,9 @@ public class EnemyDBManager
         stat.fMaxExp = enemyDB.dataArray[(int)eType].Exp;
         stat.nMoney = enemyDB.dataArray[(int)eType].Coin;
     }
+
+    public string GetEnemyName(E_CHARACTER_TYPE eType)
+    {
+        return enemyDB.dataArray[(int)eType].Name;
+    }
 }

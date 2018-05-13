@@ -116,7 +116,7 @@ public class CameraControl : MonoBehaviour
                     if (fCurrDuration >= fCtrlDuration)
                     {
                         eCtrlType = E_CAMERA_CTRL_TYPE.DEFAULT;
-                        GameManager.Instace.Performance = false;
+                        GameManager.Instace.NoMove = false;
                     }
                 }
                 break;
@@ -155,7 +155,7 @@ public class CameraControl : MonoBehaviour
         fCtrlDuration = 3.0f;
         fCurrDuration = 0.0f;
         vPrevPos = this.transform.position;
-        vBossPos = tfBoss.position + (tfBoss.forward * 4.0f) + (tfBoss.up * 1.0f);
+        vBossPos = tfBoss.position + (tfBoss.forward * 4.0f) + (tfBoss.up * 1.5f) + (tfBoss.right * 1.0f);
     }
 
     private IEnumerator DelayShake()

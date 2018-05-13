@@ -31,16 +31,27 @@ public class DungeonScene : MonoBehaviour
         SetEnemyPos();
     }
 
+    private void OnDestroy()
+    {
+        if (objPlayer)
+            objPlayer.GetComponent<PlayerControl>().AutoOff();  // 오토버튼 Off
+        EnemyPool.Instace.DisableAll();
+        GameManager.Instace.GameStart = false;
+        int cnt = objPlayPack.transform.childCount;
+        for (int i = 0; i < cnt; ++i)
+        {
+            objPlayPack.transform.GetChild(i).gameObject.SetActive(false);
+        }
+    }
+
     private void Update()
     {
         // 보스가 죽었으면
         if (arrEnemySpace[nBossNo].IsDie())
         {
             // 승리 팝업 띄우기
-            if (!GameManager.Instace.Popup)
+            if (!GameManager.Instace.NoMove)
             {
-                EnemyPool.Instace.DisableAll();
-                objPlayer.GetComponent<PlayerControl>().AutoOff();  // 오토버튼 Off
                 PlayerManager.Instace.ClearDungeon(DungeonDBManager.Instace.DungeonNo);
                 Instantiate(Resources.Load(Util.ResourcePath.POPUP_WIN));
                 PlayerManager.Instace.SetWin();
@@ -50,9 +61,8 @@ public class DungeonScene : MonoBehaviour
         if (!objPlayer.activeSelf)
         {
             // 패배 팝업 띄우기
-            if (!GameManager.Instace.Popup)
+            if (!GameManager.Instace.NoMove)
             {
-                EnemyPool.Instace.DisableAll();
                 Instantiate(Resources.Load(Util.ResourcePath.POPUP_LOSE));
             }
         }
@@ -60,12 +70,6 @@ public class DungeonScene : MonoBehaviour
         // 게임이 끝났으면 (팝업 확인 눌렀을 때)
         if (!GameManager.Instace.GameStart)
         {
-            int cnt = objPlayPack.transform.childCount;
-            for (int i = 0; i < cnt; ++i)
-            {
-                objPlayPack.transform.GetChild(i).gameObject.SetActive(false);
-            }
-
             SceneCtrlManager.Instace.ChangeScene(E_SCENE_NO.TOWN);
         }
     }
@@ -94,6 +98,8 @@ public class DungeonScene : MonoBehaviour
         {
             colBossGate.enabled = false;
             GameManager.Instace.TriggerBossGate(PlayerDestPos);
+            GameObject objBossName = Instantiate(Resources.Load(Util.ResourcePath.UI_BOSS_NAME)) as GameObject;
+            objBossName.GetComponent<BossName>().SetName(DungeonDBManager.Instace.GetEnemyName(nBossNo));
         }
     }
 }

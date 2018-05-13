@@ -120,8 +120,8 @@ public class PlayerAttackFunction : IAttackFunction
     {
         CoolTimeUpdate();
 
-        // 죽었거나 퍼포먼스 중이면
-        if (CharacterCtrl.Stat.isDead || GameManager.Instace.Performance)
+        // 죽었거나 움직이면 안될 때
+        if (CharacterCtrl.Stat.isDead || GameManager.Instace.NoMove)
         {
             for (int i = 0; i < stAttackBtn.Length; ++i)
             {

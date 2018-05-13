@@ -18,9 +18,13 @@ public class PlayerManager
     }
 
     private CharacterStat PlayerStat;
+    public CharacterStat Stat { get { return PlayerStat; } }
 
     private E_DUNGEON_NO eCurrDungeonNo;
     public E_DUNGEON_NO CurrDungeonNo { get { return eCurrDungeonNo; } }
+
+    private int[] arrWeaponCount;
+    public int GetWeaponHoldCnt(int index) { return arrWeaponCount[index]; }
 
     private bool isNewGame;
     public bool NewGame { set { isNewGame = value; } }
@@ -31,6 +35,8 @@ public class PlayerManager
     public void Setup()
     {
         PlayerStat = new CharacterStat();
+
+        arrWeaponCount = new int[WeaponDBManager.Instace.GetMaxWeaponCount()];
     }
 
     public CharacterStat LoadData()
@@ -43,9 +49,14 @@ public class PlayerManager
             PlayerStat.fCurrExp = PlayerPrefs.GetInt("fCurrExp");
             PlayerStat.nMoney = PlayerPrefs.GetInt("nMoney");
             eCurrDungeonNo = (E_DUNGEON_NO)PlayerPrefs.GetInt("eCurrDungeonNo");
+            for (int i = 0; i < arrWeaponCount.Length; ++i)
+            {
+                arrWeaponCount[i] =  PlayerPrefs.GetInt("weapon" + i);
+            }
 
             // 전체적인 스텟 셋팅
             SetStat();
+            PlayerStat.nMoney = 10000;
         }
         else
         {
@@ -59,6 +70,12 @@ public class PlayerManager
             PlayerStat.nMoney = 0;
             PlayerStat.fCurrExp = 0;
             eCurrDungeonNo = E_DUNGEON_NO.DUNGEON_01;
+            for (int i = 0; i < arrWeaponCount.Length; ++i)
+            {
+                arrWeaponCount[i] = 0;
+            }
+            // 기본 무기는 가지고 있음.
+            arrWeaponCount[0] = 1;
         }
 
         return PlayerStat;
@@ -73,6 +90,10 @@ public class PlayerManager
         PlayerPrefs.SetInt("fCurrExp", (int)PlayerStat.fCurrExp);
         PlayerPrefs.SetInt("nMoney", (int)PlayerStat.nMoney);
         PlayerPrefs.SetInt("eCurrDungeonNo", (int)eCurrDungeonNo);
+        for (int i = 0; i < arrWeaponCount.Length; ++i)
+        {
+            PlayerPrefs.SetInt("weapon" + i, arrWeaponCount[i]);
+        }
 
         PlayerPrefs.Save();
     }
@@ -139,5 +160,10 @@ public class PlayerManager
     {
         AddMoney(DungeonDBManager.Instace.GetWinCoin());
         AddExp(DungeonDBManager.Instace.GetWinExp());
+    }
+
+    public void AddWeapon(int index)
+    {
+        arrWeaponCount[index] += 1;
     }
 }

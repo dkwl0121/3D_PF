@@ -37,10 +37,12 @@ namespace Util
         public static readonly string DB_LEVEL = "DB/Level";
         public static readonly string DB_ENEMY = "DB/Enemy";
         public static readonly string DB_DUNGEON = "DB/Dungeon";
+        public static readonly string DB_WEAPON = "DB/Weapon";
 
         public static readonly string UI_PROGRESSBAR = "UI/Canvas Progressbar";
         public static readonly string UI_DAMAGE = "UI/Canvas Damage";
         public static readonly string UI_MESSAGE = "UI/Canvas Message";
+        public static readonly string UI_BOSS_NAME = "UI/BossName";
 
         public static readonly string PT_DEFAULT = "Particle/Default_Attack";
         public static readonly string PT_SKILL_01 = "Particle/Skill_01";
@@ -52,6 +54,13 @@ namespace Util
         public static readonly string POPUP_DUNGEON = "Popup/DungeonPopup";
         public static readonly string POPUP_WIN = "Popup/WinPopup";
         public static readonly string POPUP_LOSE = "Popup/LosePopup";
+        public static readonly string POPUP_EXIT = "Popup/ExitPopup";
+        public static readonly string POPUP_SHOP = "Popup/ShopPopup";
+
+        public static readonly string IMAGE_TAB_ACTIVE = "Image/Tab_Active";
+        public static readonly string IMAGE_TAB_INACTIVE = "Image/Tab_Inactive";
+
+        public static readonly string ICON_SLOT = "Icon/Slot";
 
         public static readonly string PLAY_PACK = "PlayPack";
     }

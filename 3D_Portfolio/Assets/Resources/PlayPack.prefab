@@ -114,6 +114,7 @@ GameObject:
   - component: {fileID: 223130297613473046}
   - component: {fileID: 114242275423200380}
   - component: {fileID: 114508941367628102}
+  - component: {fileID: 114455660601046802}
   m_Layer: 5
   m_Name: Canvas Default
   m_TagString: Untagged
@@ -430,7 +431,7 @@ GameObject:
   - component: {fileID: 224222475625825706}
   - component: {fileID: 222801259057722884}
   m_Layer: 5
-  m_Name: Image_ResourceBar
+  m_Name: Image_Coin
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -728,12 +729,12 @@ GameObject:
   - component: {fileID: 224207196167613944}
   - component: {fileID: 222456893732845640}
   m_Layer: 5
-  m_Name: Image_ResourceBar
+  m_Name: Image_Dia
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1190394580443470
 GameObject:
   m_ObjectHideFlags: 1
@@ -1673,7 +1674,6 @@ GameObject:
   - component: {fileID: 95433947776036326}
   - component: {fileID: 114773761924840952}
   - component: {fileID: 114671028672032800}
-  - component: {fileID: 114809610224968092}
   - component: {fileID: 54112078178273722}
   - component: {fileID: 136078142777957276}
   - component: {fileID: 195941461310107758}
@@ -2403,6 +2403,7 @@ GameObject:
   - component: {fileID: 223072196307121648}
   - component: {fileID: 114285010914895474}
   - component: {fileID: 114924761741151640}
+  - component: {fileID: 114100758042530942}
   m_Layer: 5
   m_Name: Canvas Stat
   m_TagString: Untagged
@@ -6362,6 +6363,23 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: 2000
+--- !u!114 &114100758042530942
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1624366206573888}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf1ef8ab3a43c1648adba3cf12b9aa5d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  txtLevel: {fileID: 114430044332361364}
+  imgHpMainGauge: {fileID: 114431447575304034}
+  imgHPBackGauge: {fileID: 114405557030841178}
+  txtHpValue: {fileID: 114383015212753406}
+  imgMpGauge: {fileID: 114120557969967358}
+  imgExpGauge: {fileID: 114855146672517164}
 --- !u!114 &114120557969967358
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -7176,9 +7194,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_MethodName: 
-        m_Mode: 6
+      - m_Target: {fileID: 114455660601046802}
+        m_MethodName: ClickSetting
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -7203,6 +7221,18 @@ MonoBehaviour:
   m_EffectColor: {r: 0, g: 0, b: 0, a: 0.5}
   m_EffectDistance: {x: 3, y: -3}
   m_UseGraphicAlpha: 1
+--- !u!114 &114455660601046802
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1032924434743282}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: abb634fb9760d444ebdcf8fc0fd58d12, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  txtCoin: {fileID: 114092210208160886}
 --- !u!114 &114479034435823890
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -7788,9 +7818,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_MethodName: 
-        m_Mode: 6
+      - m_Target: {fileID: 114455660601046802}
+        m_MethodName: ClickExit
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -7894,23 +7924,6 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 2
---- !u!114 &114809610224968092
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1451454076389718}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cf1ef8ab3a43c1648adba3cf12b9aa5d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  txtLevel: {fileID: 114430044332361364}
-  imgHpMainGauge: {fileID: 114431447575304034}
-  imgHPBackGauge: {fileID: 114405557030841178}
-  txtHpValue: {fileID: 114383015212753406}
-  imgMpGauge: {fileID: 114120557969967358}
-  imgExpGauge: {fileID: 114855146672517164}
 --- !u!114 &114846421911028014
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -16844,10 +16857,10 @@ RectTransform:
   m_Father: {fileID: 224494444243118806}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 20, y: 0}
+  m_SizeDelta: {x: 180, y: 50}
   m_Pivot: {x: 1, y: 1}
 --- !u!224 &224222475625825706
 RectTransform:

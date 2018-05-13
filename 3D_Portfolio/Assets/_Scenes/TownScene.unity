@@ -3951,6 +3951,7 @@ MonoBehaviour:
   nRecreateSeconds: 20
   isRecreate: 1
   isFixedRot: 0
+  isFixed: 0
 --- !u!1001 &37864887
 Prefab:
   m_ObjectHideFlags: 0
@@ -6617,6 +6618,47 @@ Prefab:
 Transform:
   m_PrefabParentObject: {fileID: 490824, guid: ca35443849d3a4c499867a5cf4677b85, type: 2}
   m_PrefabInternal: {fileID: 210877658}
+--- !u!1 &216778923
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 216778924}
+  - component: {fileID: 216778925}
+  m_Layer: 0
+  m_Name: Shop
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &216778924
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 216778923}
+  m_LocalRotation: {x: -0, y: -0.072815426, z: -0, w: 0.99734545}
+  m_LocalPosition: {x: 66.65, y: 0, z: 68.83}
+  m_LocalScale: {x: 1.0000002, y: 1, z: 1.0000002}
+  m_Children: []
+  m_Father: {fileID: 612084584}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: -8.351001, z: 0}
+--- !u!65 &216778925
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 216778923}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2, y: 2, z: 2}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &218505068
 Prefab:
   m_ObjectHideFlags: 0
@@ -12117,7 +12159,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 327364729}
   m_LocalRotation: {x: -0, y: 0.52896726, z: -0, w: 0.84864223}
-  m_LocalPosition: {x: 30.49, y: 0, z: 42.31}
+  m_LocalPosition: {x: 29.57, y: 0, z: 41.86}
   m_LocalScale: {x: 1.0000002, y: 1, z: 1.0000002}
   m_Children:
   - {fileID: 1074987177}
@@ -28225,6 +28267,7 @@ Transform:
   m_Children:
   - {fileID: 847515048}
   - {fileID: 327364730}
+  - {fileID: 216778924}
   m_Father: {fileID: 1492767556}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -30285,6 +30328,7 @@ MonoBehaviour:
   nRecreateSeconds: 10
   isRecreate: 1
   isFixedRot: 0
+  isFixed: 0
 --- !u!1001 &719574568
 Prefab:
   m_ObjectHideFlags: 0
@@ -36564,6 +36608,7 @@ MonoBehaviour:
   nRecreateSeconds: 10
   isRecreate: 1
   isFixedRot: 0
+  isFixed: 0
 --- !u!1001 &872082224
 Prefab:
   m_ObjectHideFlags: 0
@@ -39060,6 +39105,7 @@ MonoBehaviour:
   nRecreateSeconds: 0
   isRecreate: 0
   isFixedRot: 1
+  isFixed: 0
 --- !u!1001 &1011004153
 Prefab:
   m_ObjectHideFlags: 0
@@ -40470,7 +40516,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1074987176}
   m_LocalRotation: {x: -0, y: -0.25125274, z: -0, w: 0.96792156}
-  m_LocalPosition: {x: 0.71, y: 0.458, z: -2.37}
+  m_LocalPosition: {x: 0.42, y: 0.458, z: -1.21}
   m_LocalScale: {x: 11.919887, y: 1, z: 1.1814334}
   m_Children: []
   m_Father: {fileID: 327364730}
@@ -47904,6 +47950,7 @@ MonoBehaviour:
   tfToRobby: {fileID: 1825011312}
   tfFromDungeon: {fileID: 327364730}
   tfToDungeon: {fileID: 1074987177}
+  tfShop: {fileID: 216778924}
 --- !u!4 &1492767556
 Transform:
   m_ObjectHideFlags: 0
@@ -53141,6 +53188,7 @@ MonoBehaviour:
   nRecreateSeconds: 10
   isRecreate: 1
   isFixedRot: 0
+  isFixed: 0
 --- !u!1001 &1751516421
 Prefab:
   m_ObjectHideFlags: 0

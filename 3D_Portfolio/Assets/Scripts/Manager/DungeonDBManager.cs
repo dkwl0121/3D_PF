@@ -19,6 +19,7 @@ public class DungeonDBManager
 
     private dungeon DungeonDB = null;
 
+    // 현재 던전 넘버
     private E_DUNGEON_NO eDungeonNo = E_DUNGEON_NO.DUNGEON_01;
     public E_DUNGEON_NO DungeonNo { get { return eDungeonNo; } set { eDungeonNo = value; } }
 
@@ -58,5 +59,28 @@ public class DungeonDBManager
     public float GetWinExp()
     {
         return DungeonDB.dataArray[(int)eDungeonNo].Exp;
+    }
+
+    public string GetEnemyName(int posIndex)
+    {
+        switch (posIndex)
+        {
+            case 0:
+                return EnemyDBManager.Instace.GetEnemyName(DungeonDB.dataArray[(int)eDungeonNo].POS1);
+            case 1:
+                return EnemyDBManager.Instace.GetEnemyName(DungeonDB.dataArray[(int)eDungeonNo].POS2);
+            case 2:
+                return EnemyDBManager.Instace.GetEnemyName(DungeonDB.dataArray[(int)eDungeonNo].POS3);
+            case 3:
+                return EnemyDBManager.Instace.GetEnemyName(DungeonDB.dataArray[(int)eDungeonNo].POS4);
+            case 4:
+                return EnemyDBManager.Instace.GetEnemyName(DungeonDB.dataArray[(int)eDungeonNo].POS5);
+            case 5:
+                return EnemyDBManager.Instace.GetEnemyName(DungeonDB.dataArray[(int)eDungeonNo].POS6);
+            case 6:
+                return EnemyDBManager.Instace.GetEnemyName(DungeonDB.dataArray[(int)eDungeonNo].POS7);
+            default:
+                return null;
+        }
     }
 }

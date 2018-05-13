@@ -45,8 +45,8 @@ public class EnemyControl : IChracterControl
 
         if (Stat.isDead) return;
 
-        // 퍼포먼스 중이면
-        if (GameManager.Instace.Performance)
+        // 움직이면 안 될 때
+        if (GameManager.Instace.NoMove)
         {
             fCurrMoveSpeed = 0.0f;
             navMesh.ResetPath();
