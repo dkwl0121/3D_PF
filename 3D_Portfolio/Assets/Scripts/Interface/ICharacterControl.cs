@@ -113,7 +113,14 @@ public class IChracterControl : MonoBehaviour
 
     public float GetAttackValue()
     {
-        float fAttValue = Stat.fAtt + (Stat.fInt * 0.5f);
+        float fAttValue;
+
+        if (eCharType == E_CHARACTER_TYPE.PLAYER)
+            fAttValue = (Stat.fAtt * PlayerManager.Instace.GetCurrPlusAtt())
+                + (Stat.fInt * PlayerManager.Instace.GetCurrPlusInt() * 0.5f)
+                + ((Stat.fStr + PlayerManager.Instace.GetCurrPlusStr()) * 0.5f);
+        else
+            fAttValue = Stat.fAtt + (Stat.fInt * 0.5f) + (Stat.fStr * 0.5f);
 
         return fAttValue;
     }
@@ -131,6 +138,12 @@ public class IChracterControl : MonoBehaviour
 
         // 민첩에 의해 회피율이 올라감.
         if (Random.Range(0, 100) == Stat.fDex - 1) return;
+
+        float fDefence;
+        if (eCharType == E_CHARACTER_TYPE.PLAYER)
+            fDefence = Stat.fDef + PlayerManager.Instace.GetCurrPlusDef();
+        else
+            fDefence = Stat.fDef;
 
         fDamge -= Stat.fDef;
 

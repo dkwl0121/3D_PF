@@ -63,3 +63,15 @@ public enum E_SHOP_TAB
     WEAPON,
     ITEM
 }
+
+public enum E_REINFORCE_TAB
+{
+    WEAPON,
+    HEALTH
+}
+
+public enum E_INVENTORY_TAB
+{
+    WEAPON,
+    ITEM
+}

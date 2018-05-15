@@ -2,6 +2,19 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+public class PlayerWeapon
+{
+    public int nCount = 0;
+    public float fPlusAtt = 0;
+    public float fPlusInt = 0;
+}
+
+public class PlayerHealth
+{
+    public int nPlusDef = 0;
+    public int nPlusStr = 0;
+}
+
 public class PlayerManager
 {
     private static PlayerManager sInstance = null;
@@ -23,8 +36,25 @@ public class PlayerManager
     private E_DUNGEON_NO eCurrDungeonNo;
     public E_DUNGEON_NO CurrDungeonNo { get { return eCurrDungeonNo; } }
 
-    private int[] arrWeaponCount;
-    public int GetWeaponHoldCnt(int index) { return arrWeaponCount[index]; }
+    private PlayerHealth cHealth;
+    public PlayerHealth Healt { get { return cHealth; } }
+
+    private PlayerWeapon[] arrWeapon;
+    public PlayerWeapon[] WeaponData { get { return arrWeapon; } }
+    public int GetWeaponHoldCnt(int index) { return arrWeapon[index].nCount; }
+    private int nCurrWeapon;
+    public int CurrWeapon { get { return nCurrWeapon; } }
+    private bool isChangeWeapon;
+    public bool ChangeWeapon { get { return isChangeWeapon; } set { isChangeWeapon = value; } }
+
+    public float GetCurrPlusAtt() { return WeaponDBManager.Instace.GetArrWeaponInfo()[nCurrWeapon].Att + arrWeapon[nCurrWeapon].fPlusAtt; }
+    public float GetCurrPlusInt() { return WeaponDBManager.Instace.GetArrWeaponInfo()[nCurrWeapon].Inte + arrWeapon[nCurrWeapon].fPlusInt; }
+    public float GetCurrPlusDef() { return cHealth.nPlusDef; }
+    public float GetCurrPlusStr() { return cHealth.nPlusStr; }
+
+    private int[] arrItem;
+    public int[] ItemData { get { return arrItem; } }
+    public int GetItemHoldCnt(int index) { return arrItem[index]; }
 
     private bool isNewGame;
     public bool NewGame { set { isNewGame = value; } }
@@ -36,7 +66,16 @@ public class PlayerManager
     {
         PlayerStat = new CharacterStat();
 
-        arrWeaponCount = new int[WeaponDBManager.Instace.GetMaxWeaponCount()];
+        cHealth = new PlayerHealth();
+        arrWeapon = new PlayerWeapon[WeaponDBManager.Instace.GetMaxWeaponCount()];
+        for (int i = 0; i < arrWeapon.Length; ++i)
+        {
+            arrWeapon[i] = new PlayerWeapon();
+        }
+        arrItem = new int[ItemDBManager.Instace.GetMaxItemCount()];
+
+        // 무기 장착 하기
+        isChangeWeapon = true;
     }
 
     public CharacterStat LoadData()
@@ -49,34 +88,51 @@ public class PlayerManager
             PlayerStat.fCurrExp = PlayerPrefs.GetInt("fCurrExp");
             PlayerStat.nMoney = PlayerPrefs.GetInt("nMoney");
             eCurrDungeonNo = (E_DUNGEON_NO)PlayerPrefs.GetInt("eCurrDungeonNo");
-            for (int i = 0; i < arrWeaponCount.Length; ++i)
+            cHealth.nPlusDef = PlayerPrefs.GetInt("nPlusDef");
+            cHealth.nPlusStr = PlayerPrefs.GetInt("nPlusStr");
+            nCurrWeapon = PlayerPrefs.GetInt("nCurrWeapon");
+            for (int i = 0; i < arrWeapon.Length; ++i)
             {
-                arrWeaponCount[i] =  PlayerPrefs.GetInt("weapon" + i);
+                arrWeapon[i].nCount = PlayerPrefs.GetInt("weapon_nCount" + i);
+                arrWeapon[i].fPlusAtt = float.Parse(PlayerPrefs.GetString("weapon_fPlusAtt" + i));
+                arrWeapon[i].fPlusInt = float.Parse(PlayerPrefs.GetString("weapon_fPlusInt" + i));
             }
-
-            // 전체적인 스텟 셋팅
-            SetStat();
-            PlayerStat.nMoney = 10000;
+            for (int i = 0; i < arrItem.Length; ++i)
+            {
+                arrItem[i] = PlayerPrefs.GetInt("item" + i);
+            }
         }
         else
         {
             PlayerStat.nLevel = 1;
-
-            // 전체적인 스텟 셋팅
-            SetStat();
-
-            PlayerStat.fCurrHP = PlayerStat.fMaxHP;
-            PlayerStat.fCurrMP = PlayerStat.fMaxMP;
+            
             PlayerStat.nMoney = 0;
             PlayerStat.fCurrExp = 0;
             eCurrDungeonNo = E_DUNGEON_NO.DUNGEON_01;
-            for (int i = 0; i < arrWeaponCount.Length; ++i)
+            cHealth.nPlusDef = 0;
+            cHealth.nPlusStr = 0;
+            nCurrWeapon = 0;
+            for (int i = 0; i < arrWeapon.Length; ++i)
             {
-                arrWeaponCount[i] = 0;
+                arrWeapon[i].nCount = 0;
+                arrWeapon[i].fPlusAtt = 0;
+                arrWeapon[i].fPlusInt = 0;
             }
             // 기본 무기는 가지고 있음.
-            arrWeaponCount[0] = 1;
+            arrWeapon[0].nCount = 1;
+            for (int i = 0; i < arrItem.Length; ++i)
+            {
+                arrItem[i] = 0;
+            }
         }
+
+        // 레벨에 따른 스텟 셋팅
+        SetStat();
+
+        PlayerStat.fCurrHP = PlayerStat.fMaxHP;
+        PlayerStat.fCurrMP = PlayerStat.fMaxMP;
+        
+        PlayerStat.nMoney = 10000;
 
         return PlayerStat;
     }
@@ -90,9 +146,18 @@ public class PlayerManager
         PlayerPrefs.SetInt("fCurrExp", (int)PlayerStat.fCurrExp);
         PlayerPrefs.SetInt("nMoney", (int)PlayerStat.nMoney);
         PlayerPrefs.SetInt("eCurrDungeonNo", (int)eCurrDungeonNo);
-        for (int i = 0; i < arrWeaponCount.Length; ++i)
+        PlayerPrefs.SetInt("nPlusDef", cHealth.nPlusDef);
+        PlayerPrefs.SetInt("nPlusStr", cHealth.nPlusStr);
+        PlayerPrefs.SetInt("nCurrWeapon", nCurrWeapon);
+        for (int i = 0; i < arrWeapon.Length; ++i)
         {
-            PlayerPrefs.SetInt("weapon" + i, arrWeaponCount[i]);
+            PlayerPrefs.SetInt("weapon_nCount" + i, arrWeapon[i].nCount);
+            PlayerPrefs.SetString("weapon_fPlusAtt" + i, arrWeapon[i].fPlusAtt.ToString());
+            PlayerPrefs.SetString("weapon_fPlusInt" + i, arrWeapon[i].fPlusInt.ToString());
+        }
+        for (int i = 0; i < arrItem.Length; ++i)
+        {
+            PlayerPrefs.SetInt("item" + i, arrItem[i]);
         }
 
         PlayerPrefs.Save();
@@ -102,8 +167,18 @@ public class PlayerManager
     {
         // 레벨에 따른 스탯 설정
         LevelDBManager.Instace.SetStat(PlayerStat, PlayerStat.nLevel);
+    }
 
-        // 장착하고 있는 무기에 따라 추가 스탯 설정
+    public void AddHp(float hp)
+    {
+        PlayerStat.fCurrHP += hp;
+        PlayerStat.fCurrHP = Mathf.Clamp(PlayerStat.fCurrHP, 0.0f, PlayerStat.fMaxHP);
+    }
+
+    public void AddMp(float mp)
+    {
+        PlayerStat.fCurrMP += mp;
+        PlayerStat.fCurrMP = Mathf.Clamp(PlayerStat.fCurrMP, 0.0f, PlayerStat.fMaxMP);
     }
 
     public void AddExp(float exp)
@@ -162,8 +237,53 @@ public class PlayerManager
         AddExp(DungeonDBManager.Instace.GetWinExp());
     }
 
+    // 무기 소유 여부
+    public bool IsHoldWeapon(int index)
+    {
+        return arrWeapon[index].nCount != 0;
+    }
+
     public void AddWeapon(int index)
     {
-        arrWeaponCount[index] += 1;
+        arrWeapon[index].nCount += 1;
+
+        // 바로 장착하기.
+        UseWeapon(index);
+    }
+
+    public void AddItem(int index)
+    {
+        arrItem[index] += 1;
+    }
+
+    public void ReinforceWeapon(int index, float plus)
+    {
+        arrWeapon[index].fPlusAtt += plus;
+        arrWeapon[index].fPlusInt += plus;
+    }
+
+    public void ReinforceDefence(int plus)
+    {
+        cHealth.nPlusDef += plus;
+    }
+
+    public void ReinforceStrong(int plus)
+    {
+        cHealth.nPlusStr += plus;
+    }
+
+    public void UseWeapon(int index)
+    {
+        nCurrWeapon = index;
+
+        // 무기 장착 하기
+        isChangeWeapon = true;
+    }
+
+    public void UseItem(int index)
+    {
+        arrItem[index] -= 1;
+        AddHp(ItemDBManager.Instace.GetArrItemInfo()[index].Hp);
+        AddMp(ItemDBManager.Instace.GetArrItemInfo()[index].Mp);
     }
 }

@@ -18,10 +18,7 @@ public class PlayerControl : IChracterControl
         base.Awake();   // 부모의 Start() 호출
 
         StatBar = GetComponent<PlayerProgressbar>();
-
-        GameObject weapon = Resources.Load("Weapon/Staff_01") as GameObject;
-        Instantiate(weapon, objWeaponParent.transform);
-
+        
         fSearchDist = 4.0f;
         fAttackDist = 2.0f;
         navMesh.stoppingDistance = fAttackDist;
@@ -34,9 +31,6 @@ public class PlayerControl : IChracterControl
         attackFunc.eEnemyLayer = eEnemyLayer;
 
         Stat = PlayerManager.Instace.LoadData();
-
-        //====================================================================================
-        //vDestPos = GameObject.Find("Dest").transform.position;
     }
 
     private new void OnEnable()
@@ -67,6 +61,9 @@ public class PlayerControl : IChracterControl
 
             return;
         }
+
+        // 무기 체크!!
+        CheckWeapon();
 
         // 레벨 업 체크!!
         CheckLevelUp();
@@ -210,16 +207,23 @@ public class PlayerControl : IChracterControl
         transform.rotation = Quaternion.LookRotation(vLookRot, Vector3.up);
 
         fCurrMoveSpeed = fDistance * fMoveSpeed;
-
-        //// 이동
-        //if (fCurrMoveSpeed < fMoveSpeed)
-        //{
-        //    fCurrMoveSpeed = fMoveSpeed;
-        //    fCurrMoveSpeed += Time.deltaTime * fMoveSpeed;
-        //    fCurrMoveSpeed = Mathf.Clamp(fCurrMoveSpeed, 0.0f, fMoveSpeed);
-        //}
-
+        
         transform.Translate(Vector3.forward * fCurrMoveSpeed * Time.deltaTime);
+    }
+
+    private void CheckWeapon()
+    {
+        // 무기를 바꿔야 한다면
+        if (PlayerManager.Instace.ChangeWeapon)
+        {
+            // 자식이 있다면 지운다
+            if (objWeaponParent.transform.childCount > 0)
+                Destroy(objWeaponParent.transform.GetChild(0).gameObject);
+
+            GameObject weapon = Resources.Load(
+                WeaponDBManager.Instace.GetArrWeaponInfo()[PlayerManager.Instace.CurrWeapon].Weaponloadpath) as GameObject;
+            Instantiate(weapon, objWeaponParent.transform);
+        }
     }
 
     private void CheckLevelUp()

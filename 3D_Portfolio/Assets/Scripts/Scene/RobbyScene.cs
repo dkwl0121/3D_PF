@@ -14,6 +14,7 @@ public class RobbyScene : MonoBehaviour
         EnemyDBManager.Instace.Setup();
         DungeonDBManager.Instace.Setup();
         WeaponDBManager.Instace.Setup();
+        ItemDBManager.Instace.Setup();
         FrameManager.Instace.Setup();
         PlayerManager.Instace.Setup();
         EnemyPool.Instace.Setup();

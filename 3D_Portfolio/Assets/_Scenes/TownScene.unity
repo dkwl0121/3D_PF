@@ -28268,6 +28268,7 @@ Transform:
   - {fileID: 847515048}
   - {fileID: 327364730}
   - {fileID: 216778924}
+  - {fileID: 1270138127}
   m_Father: {fileID: 1492767556}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -44375,6 +44376,47 @@ Prefab:
 Transform:
   m_PrefabParentObject: {fileID: 416850, guid: 51396f3ca3b4c44449ef97390b00606e, type: 2}
   m_PrefabInternal: {fileID: 1269885222}
+--- !u!1 &1270138126
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1270138127}
+  - component: {fileID: 1270138128}
+  m_Layer: 0
+  m_Name: Reinforce
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1270138127
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1270138126}
+  m_LocalRotation: {x: -0, y: -0.072815426, z: -0, w: 0.99734545}
+  m_LocalPosition: {x: 41.22, y: 0, z: 64.77}
+  m_LocalScale: {x: 1.0000002, y: 1, z: 1.0000002}
+  m_Children: []
+  m_Father: {fileID: 612084584}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: -8.351001, z: 0}
+--- !u!65 &1270138128
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1270138126}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2, y: 2, z: 2}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &1271816753
 Prefab:
   m_ObjectHideFlags: 0
@@ -47951,6 +47993,7 @@ MonoBehaviour:
   tfFromDungeon: {fileID: 327364730}
   tfToDungeon: {fileID: 1074987177}
   tfShop: {fileID: 216778924}
+  tfReinforce: {fileID: 1270138127}
 --- !u!4 &1492767556
 Transform:
   m_ObjectHideFlags: 0

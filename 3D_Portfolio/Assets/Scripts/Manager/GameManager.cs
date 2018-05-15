@@ -20,9 +20,6 @@ public class GameManager
     private bool isCreated = false;
     public bool Created { get { return isCreated; } }
 
-    //private bool isPopup = false;
-    //public bool Popup { get { return isPopup; } set { isPopup = value; } }
-
     private bool isGameStart = false;
     public bool GameStart { get { return isGameStart; } set { isGameStart = value; } }
 

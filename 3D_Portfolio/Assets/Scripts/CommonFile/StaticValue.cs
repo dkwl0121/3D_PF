@@ -38,6 +38,7 @@ namespace Util
         public static readonly string DB_ENEMY = "DB/Enemy";
         public static readonly string DB_DUNGEON = "DB/Dungeon";
         public static readonly string DB_WEAPON = "DB/Weapon";
+        public static readonly string DB_ITEM = "DB/Item";
 
         public static readonly string UI_PROGRESSBAR = "UI/Canvas Progressbar";
         public static readonly string UI_DAMAGE = "UI/Canvas Damage";
@@ -56,7 +57,11 @@ namespace Util
         public static readonly string POPUP_LOSE = "Popup/LosePopup";
         public static readonly string POPUP_EXIT = "Popup/ExitPopup";
         public static readonly string POPUP_SHOP = "Popup/ShopPopup";
-
+        public static readonly string POPUP_REINFORCE = "Popup/ReinforcePopup";
+        public static readonly string POPUP_INVENTORY = "Popup/InventoryPopup";
+        public static readonly string POPUP_STATS = "Popup/StatsPopup";
+        public static readonly string POPUP_SETTING = "Popup/SettingPopup";
+        
         public static readonly string IMAGE_TAB_ACTIVE = "Image/Tab_Active";
         public static readonly string IMAGE_TAB_INACTIVE = "Image/Tab_Inactive";
 
