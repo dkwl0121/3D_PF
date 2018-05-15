@@ -37,6 +37,7 @@ public class PlayerControl : IChracterControl
     {
         base.OnEnable();
 
+        AllStop();
         AutoButton.SetActive(true);
     }
 

@@ -228,13 +228,27 @@ public class PopupShop : MonoBehaviour
     {
         if (eCurrTab == E_SHOP_TAB.WEAPON)
         {
-            if (arrWeaponData[nCurrSelNum].Price <= PlayerManager.Instace.Stat.nMoney
-                && !PlayerManager.Instace.IsHoldWeapon(nCurrSelNum))    // 무기를 소유하고 있지 않으면
+            if (arrWeaponData[nCurrSelNum].Price <= PlayerManager.Instace.Stat.nMoney)
             {
-                PlayerManager.Instace.AddMoney(-arrWeaponData[nCurrSelNum].Price);
-                PlayerManager.Instace.AddWeapon(nCurrSelNum);
-                // 보유 개수 업데이트
-                UpdateHoldCount();
+                if (!PlayerManager.Instace.IsHoldWeapon(nCurrSelNum))    // 무기를 소유하고 있지 않으면
+                {
+                    PlayerManager.Instace.AddMoney(-arrWeaponData[nCurrSelNum].Price);
+                    PlayerManager.Instace.AddWeapon(nCurrSelNum);
+                    // 보유 개수 업데이트
+                    UpdateHoldCount();
+                }
+                // 이미 무기를 가지고 있다면
+                else
+                {
+                    GameObject objOkPopup = Instantiate(Resources.Load(Util.ResourcePath.POPUP_OK)) as GameObject;
+                    objOkPopup.GetComponent<PopupOk>().SetDescription(Util.Message.HAD_WEAPON);
+                }
+            }
+            // 돈이모자라면
+            else
+            {
+                GameObject objOkPopup = Instantiate(Resources.Load(Util.ResourcePath.POPUP_OK)) as GameObject;
+                objOkPopup.GetComponent<PopupOk>().SetDescription(Util.Message.NO_MONEY);
             }
         }
         else
@@ -245,6 +259,12 @@ public class PopupShop : MonoBehaviour
                 PlayerManager.Instace.AddItem(nCurrSelNum);
                 // 보유 개수 업데이트
                 UpdateHoldCount();
+            }
+            // 돈이모자라면
+            else
+            {
+                GameObject objOkPopup = Instantiate(Resources.Load(Util.ResourcePath.POPUP_OK)) as GameObject;
+                objOkPopup.GetComponent<PopupOk>().SetDescription(Util.Message.NO_MONEY);
             }
         }
     }

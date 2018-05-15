@@ -15,6 +15,7 @@ namespace Util
         public static readonly string STONE_MONSTER = "StoneMonster";
         public static readonly string PUMPKIN = "Pumpkin";
         public static readonly string PLAY_PACK = "PlayPack";
+        public static readonly string MINI_MAP_CAMERA = "MiniMapCamera";
     }
     public static class AnimParam
     {
@@ -61,6 +62,7 @@ namespace Util
         public static readonly string POPUP_INVENTORY = "Popup/InventoryPopup";
         public static readonly string POPUP_STATS = "Popup/StatsPopup";
         public static readonly string POPUP_SETTING = "Popup/SettingPopup";
+        public static readonly string POPUP_OK = "Popup/OkPopup";
         
         public static readonly string IMAGE_TAB_ACTIVE = "Image/Tab_Active";
         public static readonly string IMAGE_TAB_INACTIVE = "Image/Tab_Inactive";
@@ -70,9 +72,9 @@ namespace Util
         public static readonly string PLAY_PACK = "PlayPack";
     }
 
-    //public static class AnimStateTag
-    //{
-    //    public static readonly string MOVE = "Move";
-    //    public static readonly string ATTACK = "Attack";
-    //}
+    public static class Message
+    {
+        public static readonly string NO_MONEY = "You don't have enough money.";
+        public static readonly string HAD_WEAPON = "You already have this weapon.";
+    }
 }

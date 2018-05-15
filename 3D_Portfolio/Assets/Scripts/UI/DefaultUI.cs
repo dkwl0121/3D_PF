@@ -9,9 +9,17 @@ public class DefaultUI : MonoBehaviour
 
     public GameObject objButtonList;
 
+    private GameObject objMiniMapCamera;
+
     private void Awake()
     {
         objButtonList.SetActive(false);
+    }
+
+    private void OnEnable()
+    {
+        objMiniMapCamera = GameObject.FindGameObjectWithTag(Util.Tag.MINI_MAP_CAMERA);
+        objMiniMapCamera.SetActive(false);
     }
 
     private void Update()
@@ -31,6 +39,7 @@ public class DefaultUI : MonoBehaviour
     {
         if (GameManager.Instace.NoMove) return;
 
+        ClickButtonGroup();
         Instantiate(Resources.Load(Util.ResourcePath.POPUP_INVENTORY));
     }
 
@@ -38,13 +47,25 @@ public class DefaultUI : MonoBehaviour
     {
         if (GameManager.Instace.NoMove) return;
 
+        ClickButtonGroup();
         Instantiate(Resources.Load(Util.ResourcePath.POPUP_STATS));
+    }
+
+    public void ClickMap()
+    {
+        ClickButtonGroup();
+
+        if (objMiniMapCamera.activeSelf)
+            objMiniMapCamera.SetActive(false);
+        else
+            objMiniMapCamera.SetActive(true);
     }
 
     public void ClickSetting()
     {
         if (GameManager.Instace.NoMove) return;
 
+        ClickButtonGroup();
         Instantiate(Resources.Load(Util.ResourcePath.POPUP_SETTING));
     }
 
@@ -52,6 +73,7 @@ public class DefaultUI : MonoBehaviour
     {
         if (GameManager.Instace.NoMove) return;
 
+        ClickButtonGroup();
         Instantiate(Resources.Load(Util.ResourcePath.POPUP_EXIT));
     }
 }

@@ -250,12 +250,12 @@ public class PlayerAttackFunction : IAttackFunction
                 break;
             case E_PLAYER_ATTACK_NO.SKILL_02:
                 {
-                    Camera.main.GetComponent<CameraControl>().CameraCtrlStart(E_CAMERA_CTRL_TYPE.SHAKE, 1.0f, 0.05f);
+                    Camera.main.GetComponent<CameraControl>().CameraCtrlStart(E_CAMERA_CTRL_TYPE.SHAKE, 1.5f, 0.1f);
                 }
                 break;
             case E_PLAYER_ATTACK_NO.SKILL_03:
                 {
-                    Camera.main.GetComponent<CameraControl>().CameraCtrlStart(E_CAMERA_CTRL_TYPE.SHAKE, 1.5f, 0.1f);
+                    Camera.main.GetComponent<CameraControl>().CameraCtrlStart(E_CAMERA_CTRL_TYPE.SHAKE, 2.0f, 0.2f);
                 }
                 break;
         }

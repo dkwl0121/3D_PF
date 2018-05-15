@@ -9,7 +9,9 @@ public class TownScene : MonoBehaviour
     public Transform tfFromDungeon;
     public Transform tfToDungeon;
     public Transform tfShop;
+    public Transform tfFromShop;
     public Transform tfReinforce;
+    public Transform tfFromReinforce;
 
     private GameObject objPlayer = null;
     private GameObject objPlayPack = null;
@@ -82,7 +84,8 @@ public class TownScene : MonoBehaviour
         {
             // 이미 팝업이 열려 있다면
             if (GameManager.Instace.NoMove) return;
-            
+
+            objPlayer.transform.SetPositionAndRotation(tfFromShop.position, tfFromShop.rotation);
             Instantiate(Resources.Load(Util.ResourcePath.POPUP_SHOP));
         }
         else if ((tfReinforce.position - objPlayer.transform.position).magnitude < 5.0f)
@@ -90,6 +93,7 @@ public class TownScene : MonoBehaviour
             // 이미 팝업이 열려 있다면
             if (GameManager.Instace.NoMove) return;
 
+            objPlayer.transform.SetPositionAndRotation(tfFromReinforce.position, tfFromReinforce.rotation);
             Instantiate(Resources.Load(Util.ResourcePath.POPUP_REINFORCE));
         }
     }

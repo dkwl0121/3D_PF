@@ -14,43 +14,43 @@ MonoBehaviour:
   SheetName: 3D_PF_DB
   WorksheetName: enemy
   dataArray:
-  - no: 1
+  - no: 0
     name: Green Mushroom
-    maxhp: 50
-    maxmp: 0
-    att: 15
-    def: 5
-    exp: 20
-    coin: 20
-  - no: 2
-    name: Blue Mushroom
     maxhp: 100
     maxmp: 0
-    att: 20
+    att: 30
     def: 10
-    exp: 30
-    coin: 30
-  - no: 3
-    name: Red Mushroom
-    maxhp: 150
-    maxmp: 0
-    att: 25
-    def: 15
-    exp: 40
-    coin: 40
-  - no: 4
-    name: Stone Monster
+    exp: 20
+    coin: 20
+  - no: 1
+    name: Blue Mushroom
     maxhp: 200
     maxmp: 0
-    att: 30
+    att: 60
     def: 20
+    exp: 30
+    coin: 30
+  - no: 2
+    name: Red Mushroom
+    maxhp: 300
+    maxmp: 0
+    att: 90
+    def: 30
+    exp: 40
+    coin: 40
+  - no: 3
+    name: Stone Monster
+    maxhp: 400
+    maxmp: 0
+    att: 150
+    def: 50
     exp: 50
     coin: 50
-  - no: 5
+  - no: 4
     name: Pumpkin
-    maxhp: 300
+    maxhp: 500
     maxmp: 100
-    att: 35
-    def: 25
+    att: 300
+    def: 100
     exp: 100
     coin: 100

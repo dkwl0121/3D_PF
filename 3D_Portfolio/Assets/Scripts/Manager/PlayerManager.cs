@@ -83,6 +83,10 @@ public class PlayerManager
         if (!isNewGame && PlayerPrefs.HasKey("nLevel"))
         {
             PlayerStat.nLevel = PlayerPrefs.GetInt("nLevel");
+
+            // 레벨에 따른 스텟 셋팅
+            SetStat();
+
             PlayerStat.fCurrHP = PlayerPrefs.GetInt("fCurrHP");
             PlayerStat.fCurrMP = PlayerPrefs.GetInt("fCurrMP");
             PlayerStat.fCurrExp = PlayerPrefs.GetInt("fCurrExp");
@@ -105,7 +109,13 @@ public class PlayerManager
         else
         {
             PlayerStat.nLevel = 1;
-            
+
+            // 레벨에 따른 스텟 셋팅
+            SetStat();
+
+            PlayerStat.fCurrHP = PlayerStat.fMaxHP;
+            PlayerStat.fCurrMP = PlayerStat.fMaxMP;
+
             PlayerStat.nMoney = 0;
             PlayerStat.fCurrExp = 0;
             eCurrDungeonNo = E_DUNGEON_NO.DUNGEON_01;
@@ -125,12 +135,6 @@ public class PlayerManager
                 arrItem[i] = 0;
             }
         }
-
-        // 레벨에 따른 스텟 셋팅
-        SetStat();
-
-        PlayerStat.fCurrHP = PlayerStat.fMaxHP;
-        PlayerStat.fCurrMP = PlayerStat.fMaxMP;
         
         PlayerStat.nMoney = 10000;
 

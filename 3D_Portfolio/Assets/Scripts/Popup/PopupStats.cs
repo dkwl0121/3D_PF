@@ -50,7 +50,7 @@ public class PopupStats : MonoBehaviour
         }
 
         // ATT
-        if(PlayerManager.Instace.GetCurrPlusAtt() > 0)
+        if(PlayerManager.Instace.GetCurrPlusAtt() > 1.0f)
             txtAtt.text = PlayerStat.fAtt + "<color=Green> (*" + PlayerManager.Instace.GetCurrPlusAtt() + ")</color>";
         else
             txtAtt.text = PlayerStat.fAtt.ToString();
@@ -71,7 +71,7 @@ public class PopupStats : MonoBehaviour
         txtDex.text = PlayerStat.fDex.ToString();
 
         // INT
-        if (PlayerManager.Instace.GetCurrPlusInt() > 0)
+        if (PlayerManager.Instace.GetCurrPlusInt() > 1.0f)
             txtInt.text = PlayerStat.fInt + "<color=Green> (*" + PlayerManager.Instace.GetCurrPlusInt() + ")</color>";
         else
             txtInt.text = PlayerStat.fInt.ToString();

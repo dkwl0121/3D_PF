@@ -8,6 +8,7 @@ TagManager:
   - StoneMonster
   - Pumpkin
   - PlayPack
+  - MiniMapCamera
   layers:
   - Default
   - TransparentFX
@@ -19,11 +20,11 @@ TagManager:
   - 
   - Player
   - Enemy
-  - 
-  - 
-  - 
-  - 
-  - 
+  - Npc
+  - Map
+  - Object
+  - Building
+  - RedPlayer
   - 
   - 
   - 

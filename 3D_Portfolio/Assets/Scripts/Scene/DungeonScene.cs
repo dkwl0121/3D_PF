@@ -33,8 +33,6 @@ public class DungeonScene : MonoBehaviour
 
     private void OnDestroy()
     {
-        if (objPlayer)
-            objPlayer.GetComponent<PlayerControl>().AutoOff();  // 오토버튼 Off
         EnemyPool.Instace.DisableAll();
         GameManager.Instace.GameStart = false;
         int cnt = objPlayPack.transform.childCount;

@@ -67,7 +67,9 @@ MonoBehaviour:
     uphp: 20
     upmp: 8
     cooltime: 25
-    leveluptip: Level Up!! \n Second skill button was Opened!!
+    leveluptip: 'Level Up!!
+
+      Second skill button was Opened!!'
   - level: 5
     maxhp: 500
     maxmp: 250
@@ -93,7 +95,9 @@ MonoBehaviour:
     uphp: 30
     upmp: 12
     cooltime: 35
-    leveluptip: Level Up!! \n Third skill button was Opened!!
+    leveluptip: 'Level Up!!
+
+      Third skill button was Opened!!'
   - level: 7
     maxhp: 700
     maxmp: 350
