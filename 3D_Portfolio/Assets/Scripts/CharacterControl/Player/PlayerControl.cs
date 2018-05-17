@@ -45,6 +45,7 @@ public class PlayerControl : IChracterControl
     {
         joystick.OnPointerUp(null);
         fCurrMoveSpeed = 0.0f;
+        anim.SetFloat(Util.AnimParam.MOVE_SPEED, fCurrMoveSpeed / fMoveSpeed);
         navMesh.ResetPath();
         attackFunc.ResetAttack();
     }
@@ -56,6 +57,9 @@ public class PlayerControl : IChracterControl
 
     private void Update()
     {
+        // 치트키!!
+        CheatKey();
+
         if (Stat.isDead)
         {
             AutoButton.SetActive(false);
@@ -264,5 +268,22 @@ public class PlayerControl : IChracterControl
     public void SetDestPos(Vector3 Pos)
     {
         vDestPos = Pos;
+    }
+
+    private void CheatKey()
+    {
+        if (Input.GetKeyDown(KeyCode.H))
+            PlayerManager.Instace.AddHp(100);
+        else if (Input.GetKeyDown(KeyCode.M))
+            PlayerManager.Instace.AddMp(100);
+        else if (Input.GetKeyDown(KeyCode.E))
+            PlayerManager.Instace.AddExp(100);
+        else if (Input.GetKeyDown(KeyCode.C))
+            PlayerManager.Instace.AddMoney(1000);
+        else if (Input.GetKeyDown(KeyCode.Q))
+        {
+            GameManager.Instace.QuestChange = true;
+            PlayerManager.Instace.ClearQuest = true;
+        }
     }
 }

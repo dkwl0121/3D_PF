@@ -32,6 +32,8 @@ public class PopupShop : MonoBehaviour
 
     private void Awake()
     {
+        SoundManager.Instance.PlayEfx(E_EFT_SOUND_LIST.POPUP);
+
         GameManager.Instace.NoMove = true;
 
         objRectWeapon.SetActive(false);
@@ -43,6 +45,8 @@ public class PopupShop : MonoBehaviour
 
     private void OnDestroy()
     {
+        SoundManager.Instance.PlayEfx(E_EFT_SOUND_LIST.POPUP);
+
         GameManager.Instace.NoMove = false;
     }
 
@@ -55,6 +59,8 @@ public class PopupShop : MonoBehaviour
                 // 새로 선택 된 슬롯이면
                 if (arrWeaponSlot[i].Select && nCurrSelNum != arrWeaponSlot[i].nIndex)
                 {
+                    SoundManager.Instance.PlayEfx(E_EFT_SOUND_LIST.SELECT);
+
                     arrWeaponSlot[i].SelectOn();
                     nCurrSelNum = arrWeaponSlot[i].nIndex;
                     // 다른 슬롯 해제
@@ -75,6 +81,8 @@ public class PopupShop : MonoBehaviour
                 // 새로 선택 된 슬롯이면
                 if (arrItemSlot[i].Select && nCurrSelNum != arrItemSlot[i].nIndex)
                 {
+                    SoundManager.Instance.PlayEfx(E_EFT_SOUND_LIST.SELECT);
+
                     arrItemSlot[i].SelectOn();
                     nCurrSelNum = arrItemSlot[i].nIndex;
                     // 다른 슬롯 해제
@@ -92,6 +100,8 @@ public class PopupShop : MonoBehaviour
     
     private void ClickTab(E_SHOP_TAB eTab)
     {
+        SoundManager.Instance.PlayEfx(E_EFT_SOUND_LIST.SELECT);
+
         eCurrTab = eTab;
         nCurrSelNum = 0;    // 초기화
 
@@ -232,6 +242,8 @@ public class PopupShop : MonoBehaviour
             {
                 if (!PlayerManager.Instace.IsHoldWeapon(nCurrSelNum))    // 무기를 소유하고 있지 않으면
                 {
+                    SoundManager.Instance.PlayEfx(E_EFT_SOUND_LIST.COIN);
+
                     PlayerManager.Instace.AddMoney(-arrWeaponData[nCurrSelNum].Price);
                     PlayerManager.Instace.AddWeapon(nCurrSelNum);
                     // 보유 개수 업데이트
@@ -255,10 +267,20 @@ public class PopupShop : MonoBehaviour
         {
             if (arrItemData[nCurrSelNum].Price <= PlayerManager.Instace.Stat.nMoney)
             {
+                SoundManager.Instance.PlayEfx(E_EFT_SOUND_LIST.COIN);
+
                 PlayerManager.Instace.AddMoney(-arrItemData[nCurrSelNum].Price);
                 PlayerManager.Instace.AddItem(nCurrSelNum);
                 // 보유 개수 업데이트
                 UpdateHoldCount();
+
+                // 퀘스트 성공
+                if (PlayerManager.Instace.CurrQuestNo == (int)E_QUEST_LIST.BUY_HP_POSION
+                    && nCurrSelNum == Util.NumValue.HP_POSION_INDEX)
+                {
+                    GameManager.Instace.QuestChange = true;
+                    PlayerManager.Instace.ClearQuest = true;
+                }
             }
             // 돈이모자라면
             else

@@ -176,8 +176,14 @@ public class IChracterControl : MonoBehaviour
     {
         if (eCharType != E_CHARACTER_TYPE.PLAYER)
         {
+            SoundManager.Instance.PlayEfx(E_EFT_SOUND_LIST.ENEMY_DIE);
+
             PlayerManager.Instace.AddExp(Stat.fMaxExp);
             PlayerManager.Instace.AddMoney(Stat.nMoney);
+        }
+        else
+        {
+            SoundManager.Instance.PlayEfx(E_EFT_SOUND_LIST.PLAYER_DIE);
         }
         Stat.isDead = true;
         attackFunc.ResetAttack();
@@ -187,6 +193,15 @@ public class IChracterControl : MonoBehaviour
     public void FnishDie()
     {
         anim.enabled = false;
+
+        // 퀘스트 성공
+        if ((PlayerManager.Instace.CurrQuestNo == (int)E_QUEST_LIST.RED_MUSHROOM && eCharType == E_CHARACTER_TYPE.MUSHROOM_03)
+            || (PlayerManager.Instace.CurrQuestNo == (int)E_QUEST_LIST.STONE_MONSTER && eCharType == E_CHARACTER_TYPE.STONE_MONSTER)
+            || (PlayerManager.Instace.CurrQuestNo == (int)E_QUEST_LIST.PUMPKIN && eCharType == E_CHARACTER_TYPE.PUMPKIN))
+        {
+            GameManager.Instace.QuestChange = true;
+            PlayerManager.Instace.ClearQuest = true;
+        }
 
         StartCoroutine(DelayDie());
     }

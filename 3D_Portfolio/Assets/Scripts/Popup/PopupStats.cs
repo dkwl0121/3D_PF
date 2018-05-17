@@ -17,6 +17,8 @@ public class PopupStats : MonoBehaviour
 
     private void Awake()
     {
+        SoundManager.Instance.PlayEfx(E_EFT_SOUND_LIST.POPUP);
+
         GameManager.Instace.NoMove = true;
 
         SetState();
@@ -24,6 +26,8 @@ public class PopupStats : MonoBehaviour
 
     private void OnDestroy()
     {
+        SoundManager.Instance.PlayEfx(E_EFT_SOUND_LIST.POPUP);
+
         GameManager.Instace.NoMove = false;
     }
 

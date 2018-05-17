@@ -237,6 +237,15 @@ public class PlayerAttackFunction : IAttackFunction
        
         arrEffect[index].GetComponent<ParticleSystem>().Stop();
         arrEffect[index].GetComponent<ParticleSystem>().Play();
+
+        if (index == 0)
+            SoundManager.Instance.PlayEfx(E_EFT_SOUND_LIST.PLAYER_ATT);
+        else if (index == 1)
+            SoundManager.Instance.PlayEfx(E_EFT_SOUND_LIST.PLAYER_SKILL_01);
+        else if (index == 2)
+            SoundManager.Instance.PlayEfx(E_EFT_SOUND_LIST.PLAYER_SKILL_02);
+        else if (index == 3)
+            SoundManager.Instance.PlayEfx(E_EFT_SOUND_LIST.PLAYER_SKILL_03);
     }
 
     private void ControlCamera(int index)

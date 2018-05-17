@@ -8,6 +8,8 @@ public class PopupDungeon : MonoBehaviour
 
     private void Awake()
     {
+        SoundManager.Instance.PlayEfx(E_EFT_SOUND_LIST.POPUP);
+
         GameManager.Instace.NoMove = true;
         
         // 현재 클리어 상태에 따라 오픈!!
@@ -27,12 +29,16 @@ public class PopupDungeon : MonoBehaviour
 
     public void ClickDungeon(int index)
     {
+        SoundManager.Instance.PlayEfx(E_EFT_SOUND_LIST.SELECT);
+
         DungeonDBManager.Instace.DungeonNo = (E_DUNGEON_NO)index;
         GameManager.Instace.GameStart = true;
     }
 
     public void ClosePopup()
     {
+        SoundManager.Instance.PlayEfx(E_EFT_SOUND_LIST.POPUP);
+
         Destroy(this.gameObject);
     }
 }

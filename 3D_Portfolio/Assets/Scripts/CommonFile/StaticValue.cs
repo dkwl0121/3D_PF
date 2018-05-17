@@ -7,6 +7,7 @@ namespace Util
     public static class NumValue
     {
         public static readonly int INVALID_NUMBER = (-1); //잘못된 값
+        public static readonly int HP_POSION_INDEX = 0; // HP 포션 인덱스
     }
     public static class Tag
     {
@@ -40,6 +41,8 @@ namespace Util
         public static readonly string DB_DUNGEON = "DB/Dungeon";
         public static readonly string DB_WEAPON = "DB/Weapon";
         public static readonly string DB_ITEM = "DB/Item";
+        public static readonly string DB_QUEST = "DB/Quest";
+        public static readonly string DB_STORY = "DB/Story";
 
         public static readonly string UI_PROGRESSBAR = "UI/Canvas Progressbar";
         public static readonly string UI_DAMAGE = "UI/Canvas Damage";
@@ -63,13 +66,19 @@ namespace Util
         public static readonly string POPUP_STATS = "Popup/StatsPopup";
         public static readonly string POPUP_SETTING = "Popup/SettingPopup";
         public static readonly string POPUP_OK = "Popup/OkPopup";
-        
+        public static readonly string POPUP_STORY = "Popup/StoryPopup";
+
         public static readonly string IMAGE_TAB_ACTIVE = "Image/Tab_Active";
         public static readonly string IMAGE_TAB_INACTIVE = "Image/Tab_Inactive";
 
         public static readonly string ICON_SLOT = "Icon/Slot";
 
         public static readonly string PLAY_PACK = "PlayPack";
+
+        public static readonly string MAP_TOWN_SUMMER = "Map/TownMap_Summer";
+
+        public static readonly string BGM_FOLDER = "Sound/Bgm";
+        public static readonly string EFFECT_FOLDER = "Sound/Effect";
     }
 
     public static class Message

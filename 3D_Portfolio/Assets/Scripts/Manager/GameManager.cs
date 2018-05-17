@@ -26,6 +26,9 @@ public class GameManager
     private bool isNoMove = false;
     public bool NoMove { get { return isNoMove; } set { isNoMove = value; } }
 
+    private bool isQuestChange = false;
+    public bool QuestChange { get { return isQuestChange; } set { isQuestChange = value; } }
+    
     public void Setup()
     {
         isCreated = true;

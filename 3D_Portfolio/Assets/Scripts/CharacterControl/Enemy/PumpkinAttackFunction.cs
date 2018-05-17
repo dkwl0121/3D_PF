@@ -54,6 +54,11 @@ public class PumpkinAttackFunction : IAttackFunction
         
         arrEffect[index].GetComponent<ParticleSystem>().Stop();
         arrEffect[index].GetComponent<ParticleSystem>().Play();
+
+        if (index == 0)
+            SoundManager.Instance.PlayEfx(E_EFT_SOUND_LIST.ENEMY_ATT);
+        else if (index == 1)
+            SoundManager.Instance.PlayEfx(E_EFT_SOUND_LIST.ENEMY_SKILL);
     }
 
     public new void StartDamage(int index)

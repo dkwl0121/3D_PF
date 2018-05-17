@@ -10,6 +10,8 @@ public class PopupWin : MonoBehaviour
 
     private void Awake()
     {
+        SoundManager.Instance.PlayEfx(E_EFT_SOUND_LIST.WIN);
+
         GameManager.Instace.NoMove = true;
 
         // 던전 넘버에 맞는 데이터 가져오기
@@ -24,6 +26,8 @@ public class PopupWin : MonoBehaviour
 
     public void ClickOK()
     {
+        SoundManager.Instance.PlayEfx(E_EFT_SOUND_LIST.SELECT);
+
         GameManager.Instace.GameStart = false;
         Destroy(this.gameObject);
     }

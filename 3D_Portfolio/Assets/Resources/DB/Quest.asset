@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a0b0ee0e70a51b347b0fcfab0ab134b3, type: 3}
+  m_Name: Quest
+  m_EditorClassIdentifier: 
+  SheetName: 3D_PF_DB
+  WorksheetName: quest
+  dataArray:
+  - no: 0
+    content: Find the dungeon.
+    coin: 1000
+  - no: 1
+    content: Defeat Red Mushroom.
+    coin: 2000
+  - no: 2
+    content: Buy a HP potion.
+    coin: 3000
+  - no: 3
+    content: Defeat Stone Monster.
+    coin: 4000
+  - no: 4
+    content: Strengthen the force.
+    coin: 5000
+  - no: 5
+    content: Defeat Pumpkin.
+    coin: 6000

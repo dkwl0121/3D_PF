@@ -6,6 +6,8 @@ public class PopupLose : MonoBehaviour
 {
     private void Awake()
     {
+        SoundManager.Instance.PlayEfx(E_EFT_SOUND_LIST.LOSE);
+
         GameManager.Instace.NoMove = true;
     }
 
@@ -16,6 +18,8 @@ public class PopupLose : MonoBehaviour
 
     public void ClickOK()
     {
+        SoundManager.Instance.PlayEfx(E_EFT_SOUND_LIST.SELECT);
+
         GameManager.Instace.GameStart = false;
         Destroy(this.gameObject);
     }

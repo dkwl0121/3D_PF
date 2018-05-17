@@ -19,6 +19,8 @@ public class MushroomAttackFunction : IAttackFunction
     {
         if (index < (int)E_PLAYER_ATTACK_NO.DEFAULT || index >= (int)E_PLAYER_ATTACK_NO.MAX) return;
 
+        SoundManager.Instance.PlayEfx(E_EFT_SOUND_LIST.ENEMY_ATT);
+
         Collider[] cols = null;
         switch ((E_PLAYER_ATTACK_NO)index)
         {

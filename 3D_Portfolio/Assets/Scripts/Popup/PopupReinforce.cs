@@ -13,10 +13,10 @@ public class PopupReinforce : MonoBehaviour
     private PlayerHealth Health = null;
 
     public Image imgWeaponTab;
-    public Image imgHealthTab;
+    public Image imgStrengthTab;
 
     public GameObject objRectWeapon;
-    public GameObject objRectHealth;
+    public GameObject objRectStrength;
 
     public Transform tfWeaponListParent;
     public Transform tfSelIconSlot;     // 아이콘 슬롯
@@ -37,10 +37,12 @@ public class PopupReinforce : MonoBehaviour
 
     private void Awake()
     {
+        SoundManager.Instance.PlayEfx(E_EFT_SOUND_LIST.POPUP);
+
         GameManager.Instace.NoMove = true;
 
         objRectWeapon.SetActive(false);
-        objRectHealth.SetActive(false);
+        objRectStrength.SetActive(false);
         
         // 기본은 무기탭으로 설정
         ClickTab(E_REINFORCE_TAB.WEAPON);
@@ -48,6 +50,8 @@ public class PopupReinforce : MonoBehaviour
 
     private void OnDestroy()
     {
+        SoundManager.Instance.PlayEfx(E_EFT_SOUND_LIST.POPUP);
+
         GameManager.Instace.NoMove = false;
     }
 
@@ -60,6 +64,8 @@ public class PopupReinforce : MonoBehaviour
                 // 새로 선택 된 슬롯이면
                 if (arrWeaponData[i].nCount != 0 && arrWeaponSlot[i].Select && nCurrSelNum != arrWeaponSlot[i].nIndex)
                 {
+                    SoundManager.Instance.PlayEfx(E_EFT_SOUND_LIST.SELECT);
+
                     arrWeaponSlot[i].SelectOn();
                     nCurrSelNum = arrWeaponSlot[i].nIndex;
                     // 다른 슬롯 해제
@@ -77,6 +83,8 @@ public class PopupReinforce : MonoBehaviour
     
     private void ClickTab(E_REINFORCE_TAB eTab)
     {
+        SoundManager.Instance.PlayEfx(E_EFT_SOUND_LIST.SELECT);
+
         eCurrTab = eTab;
 
         if (eCurrTab == E_REINFORCE_TAB.WEAPON)
@@ -85,14 +93,14 @@ public class PopupReinforce : MonoBehaviour
 
             // 탭 색 변경
             imgWeaponTab.sprite = Resources.Load<Sprite>(Util.ResourcePath.IMAGE_TAB_ACTIVE);
-            imgHealthTab.sprite = Resources.Load<Sprite>(Util.ResourcePath.IMAGE_TAB_INACTIVE);
+            imgStrengthTab.sprite = Resources.Load<Sprite>(Util.ResourcePath.IMAGE_TAB_INACTIVE);
             LoadWeaponTab();
         }
         else
         {
             // 탭 색 변경
             imgWeaponTab.sprite = Resources.Load<Sprite>(Util.ResourcePath.IMAGE_TAB_INACTIVE);
-            imgHealthTab.sprite = Resources.Load<Sprite>(Util.ResourcePath.IMAGE_TAB_ACTIVE);
+            imgStrengthTab.sprite = Resources.Load<Sprite>(Util.ResourcePath.IMAGE_TAB_ACTIVE);
             LoadHealthTab();
         }
     }
@@ -134,7 +142,7 @@ public class PopupReinforce : MonoBehaviour
     private void ShowWeaponTab()
     {
         objRectWeapon.SetActive(true);
-        objRectHealth.SetActive(false);
+        objRectStrength.SetActive(false);
 
         arrWeaponSlot[nCurrSelNum].SelectOn();
         UpdateSelectRect();
@@ -143,7 +151,7 @@ public class PopupReinforce : MonoBehaviour
     private void ShowHealthTab()
     {
         objRectWeapon.SetActive(false);
-        objRectHealth.SetActive(true);
+        objRectStrength.SetActive(true);
 
         UpdateHealthInfo();
     }
@@ -190,9 +198,9 @@ public class PopupReinforce : MonoBehaviour
         ClickTab(E_REINFORCE_TAB.WEAPON);
     }
 
-    public void ClickHealthTab()
+    public void ClickStrengthTab()
     {
-        ClickTab(E_REINFORCE_TAB.HEALTH);
+        ClickTab(E_REINFORCE_TAB.STRENGTH);
     }
 
     public void ClickClose()
@@ -204,6 +212,8 @@ public class PopupReinforce : MonoBehaviour
     {
         if (WeaponDBManager.Instace.GetArrWeaponInfo()[nCurrSelNum].Price / 10 <= PlayerManager.Instace.Stat.nMoney)
         {
+            SoundManager.Instance.PlayEfx(E_EFT_SOUND_LIST.COIN);
+
             PlayerManager.Instace.AddMoney(-WeaponDBManager.Instace.GetArrWeaponInfo()[nCurrSelNum].Price / 10);
             PlayerManager.Instace.ReinforceWeapon(nCurrSelNum, 0.05f);
             // 선택 렉트 업데이트
@@ -221,10 +231,19 @@ public class PopupReinforce : MonoBehaviour
     {
         if (2000 <= PlayerManager.Instace.Stat.nMoney)
         {
+            SoundManager.Instance.PlayEfx(E_EFT_SOUND_LIST.COIN);
+
             PlayerManager.Instace.AddMoney(-2000);
             PlayerManager.Instace.ReinforceDefence(10);
 
             UpdateDefenceInfo();
+
+            // 퀘스트 성공
+            if (PlayerManager.Instace.CurrQuestNo == (int)E_QUEST_LIST.REINFORCE)
+            {
+                GameManager.Instace.QuestChange = true;
+                PlayerManager.Instace.ClearQuest = true;
+            }
         }
         // 돈이모자라면
         else
@@ -234,14 +253,23 @@ public class PopupReinforce : MonoBehaviour
         }
     }
 
-    public void ClickReinforceStrong()
+    public void ClickReinforceStrength()
     {
         if (1000 <= PlayerManager.Instace.Stat.nMoney)
         {
+            SoundManager.Instance.PlayEfx(E_EFT_SOUND_LIST.COIN);
+
             PlayerManager.Instace.AddMoney(-1000);
             PlayerManager.Instace.ReinforceStrong(5);
 
             UpdateStrongInfo();
+
+            // 퀘스트 성공
+            if (PlayerManager.Instace.CurrQuestNo == (int)E_QUEST_LIST.REINFORCE)
+            {
+                GameManager.Instace.QuestChange = true;
+                PlayerManager.Instace.ClearQuest = true;
+            }
         }
         // 돈이모자라면
         else

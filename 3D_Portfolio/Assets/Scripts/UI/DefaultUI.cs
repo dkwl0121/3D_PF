@@ -29,6 +29,8 @@ public class DefaultUI : MonoBehaviour
 
     public void ClickButtonGroup()
     {
+        SoundManager.Instance.PlayEfx(E_EFT_SOUND_LIST.SELECT);
+
         if (objButtonList.activeSelf)
             objButtonList.SetActive(false);
         else
@@ -54,6 +56,8 @@ public class DefaultUI : MonoBehaviour
     public void ClickMap()
     {
         ClickButtonGroup();
+
+        SoundManager.Instance.PlayEfx(E_EFT_SOUND_LIST.POPUP);
 
         if (objMiniMapCamera.activeSelf)
             objMiniMapCamera.SetActive(false);

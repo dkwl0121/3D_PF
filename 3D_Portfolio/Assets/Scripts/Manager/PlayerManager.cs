@@ -59,6 +59,15 @@ public class PlayerManager
     private bool isNewGame;
     public bool NewGame { set { isNewGame = value; } }
 
+    private int nQuestNo;
+    public int CurrQuestNo { get { return nQuestNo; } set { nQuestNo = value; } }
+
+    private bool isClearQuest;
+    public bool ClearQuest { get { return isClearQuest; } set { isClearQuest = value; } }
+    
+    private int nStoryNo;
+    public int CurrStoryNo { get { return nStoryNo; } set { nStoryNo = value; } }
+
     private bool isLevelUp;
     public bool Levelup { get { return isLevelUp; } set { isLevelUp = value; } }
     
@@ -105,6 +114,9 @@ public class PlayerManager
             {
                 arrItem[i] = PlayerPrefs.GetInt("item" + i);
             }
+            nQuestNo = PlayerPrefs.GetInt("nQuestNo");
+            nStoryNo = PlayerPrefs.GetInt("nStoryNo");
+            isClearQuest = PlayerPrefs.GetInt("isClearQuest") == 1 ? true : false;
         }
         else
         {
@@ -134,9 +146,10 @@ public class PlayerManager
             {
                 arrItem[i] = 0;
             }
+            nQuestNo = -1;
+            nStoryNo = 0;
+            isClearQuest = true;    // 초반엔 퀘스트가 없으므로 클리어 상태!
         }
-        
-        PlayerStat.nMoney = 10000;
 
         return PlayerStat;
     }
@@ -163,6 +176,9 @@ public class PlayerManager
         {
             PlayerPrefs.SetInt("item" + i, arrItem[i]);
         }
+        PlayerPrefs.SetInt("nQuestNo", nQuestNo);
+        PlayerPrefs.SetInt("nStoryNo", nStoryNo);
+        PlayerPrefs.SetInt("isClearQuest", isClearQuest == true ? 1 : 0);
 
         PlayerPrefs.Save();
     }
@@ -195,6 +211,8 @@ public class PlayerManager
 
     public void AddMoney(int money)
     {
+        SoundManager.Instance.PlayEfx(E_EFT_SOUND_LIST.COIN);
+
         PlayerStat.nMoney += money;
     }
 
@@ -205,6 +223,8 @@ public class PlayerManager
             PlayerStat.fCurrExp = PlayerStat.fMaxExp;
             return;
         }
+
+        SoundManager.Instance.PlayEfx(E_EFT_SOUND_LIST.PLAYER_LEVEL_UP);
 
         // 넘는 Exp
         float fNextExp = PlayerStat.fCurrExp - PlayerStat.fMaxExp;

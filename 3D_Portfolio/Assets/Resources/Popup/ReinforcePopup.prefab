@@ -325,7 +325,7 @@ GameObject:
   - component: {fileID: 114278712886928118}
   - component: {fileID: 114097061643276900}
   m_Layer: 5
-  m_Name: Tab_Health
+  m_Name: Tab_Strength
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -342,7 +342,7 @@ GameObject:
   - component: {fileID: 222919661360594980}
   - component: {fileID: 114638478524795964}
   m_Layer: 5
-  m_Name: Rect_Strong
+  m_Name: Rect_Strength
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -881,7 +881,7 @@ GameObject:
   m_Component:
   - component: {fileID: 224344543209320858}
   m_Layer: 5
-  m_Name: Health Rect
+  m_Name: Strength Rect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1234,7 +1234,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 114807274792805588}
-        m_MethodName: ClickHealthTab
+        m_MethodName: ClickStrengthTab
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1656,7 +1656,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 114807274792805588}
-        m_MethodName: ClickReinforceStrong
+        m_MethodName: ClickReinforceStrength
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2899,7 +2899,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Strong value : '
+  m_Text: 'Strength value : '
 --- !u!114 &114805839482393078
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2945,9 +2945,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   imgWeaponTab: {fileID: 114971805959481518}
-  imgHealthTab: {fileID: 114278712886928118}
+  imgStrengthTab: {fileID: 114278712886928118}
   objRectWeapon: {fileID: 1200320881869594}
-  objRectHealth: {fileID: 1891034076416976}
+  objRectStrength: {fileID: 1891034076416976}
   tfWeaponListParent: {fileID: 224429171887521244}
   tfSelIconSlot: {fileID: 224035232068013850}
   txtSelName: {fileID: 114810160114796660}
@@ -3066,9 +3066,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Strong
-
-'
+  m_Text: Strength
 --- !u!114 &114838547810543684
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3355,7 +3353,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Health
+  m_Text: Strength
 --- !u!114 &114926088882511092
 MonoBehaviour:
   m_ObjectHideFlags: 1

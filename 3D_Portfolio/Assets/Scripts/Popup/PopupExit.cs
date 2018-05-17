@@ -16,12 +16,16 @@ public class PopupExit : MonoBehaviour
 
     public void ClickYes()
     {
+        SoundManager.Instance.PlayEfx(E_EFT_SOUND_LIST.SELECT);
+
         GameManager.Instace.Exit(SceneCtrlManager.Instace.CurrSceneNo);
         Destroy(this.gameObject);
     }
 
     public void ClickNo()
     {
+        SoundManager.Instance.PlayEfx(E_EFT_SOUND_LIST.SELECT);
+
         Destroy(this.gameObject);
     }
 }

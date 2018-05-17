@@ -34,6 +34,8 @@ public class PopupInventory : MonoBehaviour
 
     private void Awake()
     {
+        SoundManager.Instance.PlayEfx(E_EFT_SOUND_LIST.POPUP);
+
         GameManager.Instace.NoMove = true;
 
         objRectWeapon.SetActive(false);
@@ -45,6 +47,8 @@ public class PopupInventory : MonoBehaviour
 
     private void OnDestroy()
     {
+        SoundManager.Instance.PlayEfx(E_EFT_SOUND_LIST.POPUP);
+
         GameManager.Instace.NoMove = false;
     }
 
@@ -57,6 +61,8 @@ public class PopupInventory : MonoBehaviour
                 // 새로 선택 된 슬롯이면
                 if (arrWeaponSlot[i] != null && arrWeaponSlot[i].Select && nCurrSelNum != arrWeaponSlot[i].nIndex)
                 {
+                    SoundManager.Instance.PlayEfx(E_EFT_SOUND_LIST.SELECT);
+
                     arrWeaponSlot[i].SelectOn();
                     nCurrSelNum = arrWeaponSlot[i].nIndex;
                     // 다른 슬롯 해제
@@ -77,6 +83,8 @@ public class PopupInventory : MonoBehaviour
                 // 새로 선택 된 슬롯이면
                 if (arrItemSlot[i] != null && arrItemSlot[i].Select && nCurrSelNum != arrItemSlot[i].nIndex)
                 {
+                    SoundManager.Instance.PlayEfx(E_EFT_SOUND_LIST.SELECT);
+
                     arrItemSlot[i].SelectOn();
                     nCurrSelNum = arrItemSlot[i].nIndex;
                     // 다른 슬롯 해제
@@ -94,6 +102,8 @@ public class PopupInventory : MonoBehaviour
 
     private void ClickTab(E_INVENTORY_TAB eTab)
     {
+        SoundManager.Instance.PlayEfx(E_EFT_SOUND_LIST.SELECT);
+
         eCurrTab = eTab;
 
         if (eCurrTab == E_INVENTORY_TAB.WEAPON)
@@ -307,6 +317,8 @@ public class PopupInventory : MonoBehaviour
     {
         if (eCurrTab == E_INVENTORY_TAB.WEAPON)
         {
+            SoundManager.Instance.PlayEfx(E_EFT_SOUND_LIST.SELECT);
+
             PlayerManager.Instace.UseWeapon(nCurrSelNum);
             
             // 보유 목록 업데이트
@@ -314,6 +326,8 @@ public class PopupInventory : MonoBehaviour
         }
         else
         {
+            SoundManager.Instance.PlayEfx(E_EFT_SOUND_LIST.SELECT);
+
             PlayerManager.Instace.UseItem(nCurrSelNum);
 
             // 사용한 아이템의 개수가 0이라면 -> 보유 목록 업데이트

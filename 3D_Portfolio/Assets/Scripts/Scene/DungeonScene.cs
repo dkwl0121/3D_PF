@@ -15,8 +15,24 @@ public class DungeonScene : MonoBehaviour
 
     public BoxCollider colBossGate;
 
+    public GameObject objWinterMap;
+    public GameObject objSummerMap;
+
     private void Awake()
     {
+        SoundManager.Instance.PlayBgm(E_BGM_SOUND_LIST.DUNGEON);
+
+        // == 현재 맵 종류 선택 ==
+        // 스토리 진행이 다 끝났다면
+        if (PlayerManager.Instace.CurrStoryNo >= StoryDBManager.Instace.GetMaxStoryNo())
+        {
+            Destroy(objWinterMap);
+        }
+        else
+        {
+            Destroy(objSummerMap);
+        }
+
         objPlayPack = GameObject.FindGameObjectWithTag(Util.Tag.PLAY_PACK);
         int cnt = objPlayPack.transform.childCount;
         for (int i = 0; i < cnt; ++i)
@@ -50,6 +66,8 @@ public class DungeonScene : MonoBehaviour
             // 승리 팝업 띄우기
             if (!GameManager.Instace.NoMove)
             {
+                SoundManager.Instance.StopBgm();
+
                 PlayerManager.Instace.ClearDungeon(DungeonDBManager.Instace.DungeonNo);
                 Instantiate(Resources.Load(Util.ResourcePath.POPUP_WIN));
                 PlayerManager.Instace.SetWin();
@@ -61,6 +79,8 @@ public class DungeonScene : MonoBehaviour
             // 패배 팝업 띄우기
             if (!GameManager.Instace.NoMove)
             {
+                SoundManager.Instance.StopBgm();
+
                 Instantiate(Resources.Load(Util.ResourcePath.POPUP_LOSE));
             }
         }
@@ -94,6 +114,9 @@ public class DungeonScene : MonoBehaviour
         // 플레이어라면
         if (other.gameObject.CompareTag(Util.Tag.PLAYER))
         {
+            SoundManager.Instance.PlayBgm(E_BGM_SOUND_LIST.BOSS);
+            SoundManager.Instance.PlayEfx(E_EFT_SOUND_LIST.ENEMY_BOSS);
+
             colBossGate.enabled = false;
             GameManager.Instace.TriggerBossGate(PlayerDestPos);
             GameObject objBossName = Instantiate(Resources.Load(Util.ResourcePath.UI_BOSS_NAME)) as GameObject;
